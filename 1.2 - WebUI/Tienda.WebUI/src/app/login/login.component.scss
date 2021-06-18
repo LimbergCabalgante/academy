@@ -1,0 +1,16 @@
+.form-item{
+    margin-right: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    
+    form button {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .form-item {
+        width: 100%;
+    }
+
+}

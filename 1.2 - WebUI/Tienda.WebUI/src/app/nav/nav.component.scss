@@ -1,0 +1,57 @@
+.content{
+    margin: 10px 10px;
+}
+
+.fas{
+    font-family: 'FontAwesome';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar {
+    justify-content: space-between;
+}
+
+span {
+    padding-right: 1rem;
+}
+
+mat-sidenav-container {
+    height: 100%
+}
+
+mat-sidenav {
+    background-color: purple;
+    width: 200px;
+}
+
+.navSpan {
+cursor: pointer;
+}
+
+.sideNavItem{
+    color: #ffffff
+}
+
+.when-mobile{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    
+    .when-mobile{
+        display: inline;
+    
+    }
+
+    .when-not-mobile{
+        display: none;
+
+    }
+
+    .fa-bars{
+        font-size: 35px;
+
+    }
+
+}
