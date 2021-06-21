@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Tienda.Interfaces;
@@ -16,13 +17,13 @@ namespace TiendaWeb.Controllers
     {
         // GET: api/<Product>
         [HttpGet]
-        public ActionResult<IEnumerable<ProductForList>> Get([FromQuery]ProductFilter priceFilter,[FromServices] IProductLogic productLogic)
+        public ActionResult<IEnumerable<ProductForList>> Get([FromServices] IProductLogic productLogic)
         {
-            var products = productLogic.ListProducts().Where(t => t.Price > priceFilter.Price).Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price));
+            var products = productLogic.ListProducts().Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price, c.CategoryId, c.Status));
             return Ok(products);
         }
 
-        // GET api/<Product>/5
+        // GET api/<Product>/id
         [HttpGet("{id}")]
         public ActionResult<ProductForList> Get(int id, [FromServices] IProductLogic productLogic)
         {
@@ -30,30 +31,33 @@ namespace TiendaWeb.Controllers
             if (product == null)
                 return NotFound();
 
-            return Ok(new ProductForList(product.Id, product.Name, product.Description, product.Price));
+            return Ok(new ProductForList(product.Id, product.Name, product.Description, product.Price, product.CategoryId, product.Status));
+        }
 
-
+        // GET api/<Product>/pagination
+        [HttpGet("pagination")]
+        public ActionResult<ProductForList> Get([Required]int pageIndex, [Required]int pageSize, int order, int category, [FromServices] IProductLogic productLogic)
+        {
+            var products = productLogic.GetProductsPaginated(pageIndex, pageSize, order, category);
+            return Ok(products);
         }
 
         // POST api/<Product>
         [HttpPost]
-        public ActionResult<int> Post([FromBody] ProductBase product, [FromServices] IProductLogic productLogic)
+        public ActionResult Post([FromBody] ProductBase product, [FromServices] IProductLogic productLogic)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var newProduct = productLogic.CreateProduct(new Dtos.Product
+            productLogic.CreateProduct(new Dtos.Product
             {
                 Name = product.Name,
                 Description = product.Description,
-                Price = product.Price.Value
+                Price = product.Price.Value,
+                CategoryId = product.CategoryId,
+                Status = product.Status
             });
-            return (Ok(newProduct.Id));
+            return Ok();
         }
 
-        // PUT api/<Product>/5
+        // PUT api/<Product>/id
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ProductBase product, [FromServices] IProductLogic productLogic)
         {
@@ -62,12 +66,15 @@ namespace TiendaWeb.Controllers
                 Id = id,
                 Description = product.Description,
                 Name = product.Name,
-                Price = product.Price.Value
+                Price = product.Price.Value,
+                CategoryId = product.CategoryId,
+                Status = product.Status
+
             });
             return Ok();
         }
 
-        // DELETE api/<Product>/5
+        // DELETE api/<Product>/id
         [HttpDelete("{id}")]
         public ActionResult  Delete(int id, [FromServices] IProductLogic productLogic)
         {

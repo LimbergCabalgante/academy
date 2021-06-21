@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Tienda.DataAccessDatabase;
+using Tienda.Dapper;
 using Tienda.Interfaces;
 using Tienda.Logic;
 
@@ -37,7 +37,6 @@ namespace TiendaWeb
             });
           
             services.AddScoped<IProductLogic, ProductLogic>();
-            services.AddScoped<IProductPersistence>(s => new ProductDataAccessDatabase(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

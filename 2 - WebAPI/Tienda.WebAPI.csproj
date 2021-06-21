@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\source\repos\Tienda\3 - Logic\Tienda.Logic\Tienda.Logic.csproj" />
+    <ProjectReference Include="..\..\..\source\repos\Tienda\4 - DataAccess\Tienda.Dapper\Tienda.Dapper.csproj" />
+    <ProjectReference Include="..\..\..\source\repos\Tienda\4 - DataAccess\Tienda.DataAccess\Tienda.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\source\repos\Tienda\5 - Common\Tienda.Dto\Tienda.Dto.csproj" />
+    <ProjectReference Include="..\..\..\source\repos\Tienda\5 - Common\Tienda.Interfaces\Tienda.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
