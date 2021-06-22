@@ -15,8 +15,12 @@ export class SignupComponent implements OnInit {
 
     let self = this;
       self.form = this.formBuilder.group({
+      name: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+      surname: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+      birthDate: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       username: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
-      password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]]
+      password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]]
     });
 
   }

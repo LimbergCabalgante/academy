@@ -1,15 +1,38 @@
-<h1>Registro</h1>
+<div class="page-container">
+
+<h1 class="page-title">Registro</h1>
 
 <form name="form" [formGroup]="form" novalidate>
+    
+
+    <mat-form-field class="form-item" appearance="outline">
+        <mat-label>Nombre</mat-label>
+            <input matInput class="form-input" formControlName="name" placeholder="Juan">
+    </mat-form-field>
+
+    <mat-form-field class="form-item" appearance="outline">
+        <mat-label>Apellido</mat-label>
+            <input matInput class="form-input" formControlName="surname" placeholder="Juanes">
+    </mat-form-field>
+
+    <mat-form-field class="form-item" appearance="outline">
+        <mat-label>Fecha de Nacimiento</mat-label>
+            <input type="date" matInput class="form-input" formControlName="birthDate">
+    </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
         <mat-label>Usuario</mat-label>
-            <input matInput class="form-input" formControlName="username">
+            <input matInput class="form-input" formControlName="username" placeholder="xXJuanJuanesXx">
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
         <mat-label>Contraseña</mat-label>
-            <input type="password" matInput class="form-input" formControlName="password">
+            <input type="password" matInput class="form-input" formControlName="password" placeholder="Juancito12345678">
+    </mat-form-field>
+
+    <mat-form-field class="form-item" appearance="outline">
+        <mat-label>Confirmar Contraseña</mat-label>
+            <input type="password" matInput class="form-input" formControlName="confirmPassword" placeholder="Juancito12345678">
     </mat-form-field>
 
     <button color="primary" mat-raised-button [disabled]="!form.valid" (click)="sendData()">
@@ -17,3 +40,5 @@
     </button>
 
 </form>
+
+</div>

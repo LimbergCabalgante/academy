@@ -1,0 +1,70 @@
+.page-title{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.products-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.product{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-self: flex-start;
+    width: 120px;
+    height: 180px;
+    margin: 10px;
+    border: rgb(0, 0, 0) dashed 1px;
+}
+
+.product-image, .product-title, .product-description{
+    display: flex;
+}
+
+.product-image{
+    width: 60%;
+    height: 40%;
+    margin: 5% 20%;
+    object-fit: cover;
+    border: rgb(128, 128, 128) solid 1px;
+}
+
+.product-name{
+    font-size: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-description{
+    margin: 5px;
+    font-size: 10px;
+    line-height: 12px;
+    word-spacing: 1px;
+}
+
+.buttons-container{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.buttons-container button{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 1100px) {
+    
+    .page-container{
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+    
+}
