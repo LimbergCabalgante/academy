@@ -1,0 +1,39 @@
+.product{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-self: flex-start;
+    width: 120px;
+    height: 200px;
+    margin: 10px;
+    border: rgb(0, 0, 0) dashed 1px;
+}
+
+.product-image, .product-title, .product-description, .product-price{
+    display: flex;
+}
+
+.product-image{
+    width: 60%;
+    height: 40%;
+    margin: 5% 20%;
+    object-fit: cover;
+    border: rgb(128, 128, 128) solid 1px;
+}
+
+.product-name{
+    font-size: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-description{
+    margin: 5px;
+    font-size: 10px;
+    line-height: 12px;
+    word-spacing: 1px;
+}
+
+.product-price{
+    margin-left: auto;
+    margin-right: auto;
+}

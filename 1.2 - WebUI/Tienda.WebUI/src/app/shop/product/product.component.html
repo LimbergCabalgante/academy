@@ -1,0 +1,6 @@
+<div class="product">
+    <img [src]="product.imageUrl" class="product-image">
+    <b class="product-name">{{ (product.name.length > 20) ? (product.name | slice:0:20) + '...' : (product.name) }}</b>
+    <p class="product-description">{{ (product.description.length > 80) ? (product.description | slice:0:80) + '...' : (product.description) }}</p>
+    <b class="product-price">${{ product.price }}</b>
+</div>
