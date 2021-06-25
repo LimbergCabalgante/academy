@@ -4,7 +4,6 @@
 
 <form name="form" [formGroup]="form" novalidate>
     
-
     <mat-form-field class="form-item" appearance="outline">
         <mat-label>Nombre</mat-label>
             <input matInput class="form-input" formControlName="name" placeholder="Juan">
@@ -17,7 +16,9 @@
 
     <mat-form-field class="form-item" appearance="outline">
         <mat-label>Fecha de Nacimiento</mat-label>
-            <input type="date" matInput class="form-input" formControlName="birthDate">
+            <input matInput class="form-input" formControlName="birthDate" [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
