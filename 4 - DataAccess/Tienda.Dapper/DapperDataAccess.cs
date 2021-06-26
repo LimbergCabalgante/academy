@@ -120,6 +120,14 @@ namespace Tienda.Dapper
 
         }
 
+        public List<Category> GetCategories()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Category>("SELECT * FROM dbo.Categories").AsList();
+            }
+        }
+
         private Product ProductMapper(dynamic dbProduct)
         {
             if(dbProduct != null)

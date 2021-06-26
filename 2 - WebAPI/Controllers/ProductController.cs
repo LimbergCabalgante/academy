@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dtos;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -78,12 +79,22 @@ namespace TiendaWeb.Controllers
 
         // DELETE api/<Product>/id
         [HttpDelete("{id}")]
-        public ActionResult  Delete(int id, [FromServices] IProductLogic productLogic)
+        public ActionResult Delete(int id, [FromServices] IProductLogic productLogic)
         {
             var borrado = productLogic.DeleteProduct(id);
             if (!borrado)
                 return NotFound();
             return Ok();
+        }
+
+        //Other Product-related requets
+
+        // GET api/<Product>/categories
+        [HttpGet("categories")]
+        public ActionResult<Category> GetCategories([FromServices] IProductLogic productLogic)
+        {
+            var categories = productLogic.GetCategories();
+            return Ok(categories);
         }
     }
 }

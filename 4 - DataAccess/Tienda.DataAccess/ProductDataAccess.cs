@@ -71,5 +71,10 @@ namespace Persistencia
         {
             return Products.FirstOrDefault(p => p.Id == id);
         }
+
+        public List<Category> GetCategories()
+        {
+            return GetCategories();
+        }
     }
 }

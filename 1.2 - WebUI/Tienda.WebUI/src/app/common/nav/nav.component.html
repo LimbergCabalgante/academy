@@ -2,23 +2,25 @@
 
     <mat-sidenav position="end" [(opened)]="opened">
         <mat-nav-list>
+            <a class="sideNavItem" mat-list-item [routerLink]="['/shop']"> Tienda </a>
+            <a class="sideNavItem" mat-list-item [routerLink]="['/cart']"> Tu Carrito </a>
+            <a class="sideNavItem" mat-list-item [routerLink]="['/orders']"> Tus Ordenes </a>
             <a class="sideNavItem" mat-list-item [routerLink]="['/signup']"> Registrate </a>
             <a class="sideNavItem" mat-list-item [routerLink]="['/login']"> Inicia Sesión </a>
-            <a class="sideNavItem" mat-list-item [routerLink]="['/shop']"> Tienda </a>
-            <a class="sideNavItem" mat-list-item [routerLink]="['/orders']"> Mis Ordenes </a>
         </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
         <mat-toolbar color="primary" class="navbar">
 
-            <div> Maxi$tore </div>
+            <div></div>
 
             <div>
                 <span class="navSpan when-not-mobile" [routerLink]="['/shop']"><i class="fas fa-gifts"></i> Tienda</span>
+                <span class="navSpan when-not-mobile" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i> Tu Carrito</span>
+                <span class="navSpan when-not-mobile" [routerLink]="['/orders']"><i class="fas fa-clipboard-list"></i> Tus Ordenes</span>
                 <span class="navSpan when-not-mobile" [routerLink]="['/signup']"><i class="fas fa-user-plus"></i> Registrate</span>
                 <span class="navSpan when-not-mobile" [routerLink]="['/login']"><i class="fas fa-sign-in-alt"></i> Inicia Sesión</span>
-                <span class="navSpan when-not-mobile" [routerLink]="['/orders']"><i class="fas fa-clipboard-list"></i> Tus Ordenes</span>
                 <span class="navSpan when-mobile" (click)="opened=!opened"><i class="fas fa-bars"></i></span>
             </div>
         

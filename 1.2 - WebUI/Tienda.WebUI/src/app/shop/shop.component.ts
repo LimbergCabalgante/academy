@@ -11,16 +11,7 @@ import { Category } from '../common/dtos/category';
 })
 export class ShopComponent implements OnInit {
   products: Product[] = [];
-  categories: Category[] = [
-    {
-      id: 0,
-      description: "Comida"
-    },
-    {
-      id: 1,
-      description: "Bebida"
-    },
-  ];
+  categories: Category[] = [];
   selectedCategory: number;
 
   constructor(private productsService: ProductsService) { }
@@ -35,8 +26,12 @@ export class ShopComponent implements OnInit {
       category: 0
     }
 
-    this.productsService.getProductsPaginated(productParams).subscribe(response =>{
-      this.products = response
+    this.productsService.getProductsPaginated(productParams).subscribe(products =>{
+      this.products = products;
+    })
+
+    this.productsService.getCategories().subscribe(categories=>{
+      this.categories = categories;
     })
 
   }

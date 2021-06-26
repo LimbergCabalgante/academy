@@ -3,7 +3,6 @@ using Persistencia;
 using System;
 using System.Collections.Generic;
 using Tienda.Dapper;
-using Tienda.Dto;
 using Tienda.Interfaces;
 
 namespace Tienda.Logic
@@ -54,6 +53,11 @@ namespace Tienda.Logic
         public int ValidateUserInput(int id, string type)
         {
             return dataAccess.ValidateUserInput(id, type);
+        }
+
+        public List<Category> GetCategories()
+        {
+            return dataAccess.GetCategories();
         }
     }
 }

@@ -19,6 +19,8 @@ namespace Tienda.Interfaces
         void UpdateProduct(Product newProductData);
 
         public int ValidateUserInput(int id, string type);
+
+        public List<Category> GetCategories();
     }
 
 }
