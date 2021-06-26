@@ -3,7 +3,8 @@ CREATE PROCEDURE [dbo].[Products_GetProductsPaginated]
 	-- Add the parameters for the stored procedure here
 	@PageIndex INT,
 	@PageSize INT,
-	@Order INT,
+	@OrderBy VARCHAR(50),
+	@OrderDirection INT,
 	@Category INT
 
 AS
@@ -25,13 +26,14 @@ BEGIN
     SELECT *
 	FROM dbo.Products
 
-	WHERE CategoryId = @Category OR @Category = 0
+	WHERE CategoryId = @Category OR @Category = 0 OR @Category is null
 
 	ORDER BY
-		CASE WHEN @Order = 0 or @Order > 3 or @Order is null THEN [Name] END ASC,
-		CASE WHEN @Order = 1 THEN [Name] END DESC,
-		CASE WHEN @Order = 2 THEN [Price] END ASC,
-		CASE WHEN @Order = 3 THEN [Price] END DESC
+		CASE WHEN @OrderBy = 'name' AND @OrderDirection = 0 THEN [Name] END ASC,
+		CASE WHEN @OrderBy = 'name' AND @OrderDirection = 1 THEN [Name] END DESC,
+		CASE WHEN @OrderBy = 'price' AND @OrderDirection = 0 THEN [Price] END ASC,
+		CASE WHEN @OrderBy = 'price' AND @OrderDirection = 1 THEN [Price] END DESC,
+		CASE WHEN 1 = 1 THEN [Name] END ASC
 
 	OFFSET (@PageSize * (@PageIndex -1)) ROWS
 	FETCH NEXT @PageSize ROWS ONLY

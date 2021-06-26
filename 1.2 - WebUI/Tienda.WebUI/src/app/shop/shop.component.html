@@ -39,11 +39,11 @@
     <div *ngIf="products.length < 1" class="not-found">No se han encontrado productos</div>
 
     <div class="buttons-container">
-        <button *ngIf="existingPages > 1" mat-raised-button color="primary" (click)="previousPage()"> < </button>
+        <button *ngIf="existingPages > 1" mat-mini-fab color="primary" (click)="previousPage()"> < </button>
         <span *ngFor="let page of existingPages | range, let i = index">
-            <button mat-raised-button color="primary" (click)="goToPage(i + 1)" [ngClass]="{'current-page':currentPage === i + 1}"> {{ i + 1 }} </button>
+            <button mat-mini-fab color="primary" (click)="goToPage(i + 1)" *ngIf="i < currentPage + 3 && i > currentPage - 5 " [ngClass]="{'current-page':currentPage === i + 1}"> {{ i + 1 }} </button>
         </span>
-        <button *ngIf="existingPages > 1" mat-raised-button color="primary" (click)="nextPage()"> > </button>
+        <button *ngIf="existingPages > 1" mat-mini-fab color="primary" (click)="nextPage()"> > </button>
     </div>
 
 </div>

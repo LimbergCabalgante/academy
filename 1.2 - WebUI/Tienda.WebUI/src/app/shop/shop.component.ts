@@ -112,18 +112,20 @@ export class ShopComponent implements OnInit {
   
   // By Id
   goToPage(page){
-    let productParams: ProductParams = {
-      pageIndex: page,
-      pageSize: 8,
-      orderBy: this.selectedOrderBy,
-      orderDirection: this.selectedOrderDirection,
-      category: this.selectedCategory,
+    if(this.currentPage != page){
+      let productParams: ProductParams = {
+        pageIndex: page,
+        pageSize: 8,
+        orderBy: this.selectedOrderBy,
+        orderDirection: this.selectedOrderDirection,
+        category: this.selectedCategory,
+      }
+
+      this.productsService.getProductsPaginated(productParams).subscribe(products =>{
+        this.products = products;
+        this.currentPage = productParams.pageIndex;
+      })
     }
-
-    this.productsService.getProductsPaginated(productParams).subscribe(products =>{
-      this.products = products;
-      this.currentPage = productParams.pageIndex;
-    })
   }
-
+  
 }
