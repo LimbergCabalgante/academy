@@ -5,14 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NavComponent } from './nav/nav.component';
-import { HomeComponent } from './home/home.component';
-import { OrdersComponent } from './orders/orders.component';
+import { NavComponent } from './common/nav/nav.component';
 
 import { UserModule } from './user/user.module';
 import { ShopModule } from './shop/shop.module';
 
-import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,14 +19,11 @@ import { MatListModule } from '@angular/material/list';
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent,
-    OrdersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
     MatMenuModule,

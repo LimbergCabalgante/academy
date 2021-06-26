@@ -14,4 +14,8 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleImageError(){
+    this.product.imageUrl = "../../../../assets/no-product.png"
+  }
+
 }

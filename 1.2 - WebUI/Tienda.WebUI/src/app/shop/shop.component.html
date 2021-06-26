@@ -1,6 +1,15 @@
 <div class="page-container"> 
 
-    <h1 class="page-title">Tienda</h1>
+    <h1 class="page-title">Productos</h1>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <mat-select [(ngModel)]="selectedCategory">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+                {{category.description}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
     <div class="products-container">    
         <div *ngFor="let product of products">

@@ -1,8 +1,16 @@
+.page-container{
+    margin-top: 80px;
+}
+
 .page-title{
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: bold;
     text-align: center;
     margin-top: 24px;
+}
+
+mat-form-field{
+    width: 100%;
 }
 
 .products-container{
@@ -15,6 +23,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    margin-top: 6px;
 }
 
 .buttons-container button{

@@ -46,9 +46,9 @@ namespace Tienda.Logic
             return dataAccess.GetProduct(id);
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, int order, int category)
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, int category)
         {
-            return this.dataAccess.GetProductsPaginated(pageIndex, pageSize, order, category);
+            return this.dataAccess.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, category);
         }
 
         public int ValidateUserInput(int id, string type)

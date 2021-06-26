@@ -12,5 +12,6 @@ namespace Dtos
         public DateTime CreatedDate { get; set; }
         public ProductStatus Status { get; set; }
         public int CategoryId { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

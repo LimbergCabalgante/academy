@@ -19,7 +19,7 @@ namespace TiendaWeb.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ProductForList>> Get([FromServices] IProductLogic productLogic)
         {
-            var products = productLogic.ListProducts().Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price, c.CategoryId, c.Status));
+            var products = productLogic.ListProducts().Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price, c.CategoryId, c.Status, c.ImageUrl));
             return Ok(products);
         }
 
@@ -31,14 +31,14 @@ namespace TiendaWeb.Controllers
             if (product == null)
                 return NotFound();
 
-            return Ok(new ProductForList(product.Id, product.Name, product.Description, product.Price, product.CategoryId, product.Status));
+            return Ok(new ProductForList(product.Id, product.Name, product.Description, product.Price, product.CategoryId, product.Status, product.ImageUrl));
         }
 
         // GET api/<Product>/pagination
         [HttpGet("pagination")]
-        public ActionResult<ProductForList> Get([Required]int pageIndex, [Required]int pageSize, int order, int category, [FromServices] IProductLogic productLogic)
+        public ActionResult<ProductForList> Get([Required]int pageIndex, [Required]int pageSize, string orderBy, int orderDirection, int category, [FromServices] IProductLogic productLogic)
         {
-            var products = productLogic.GetProductsPaginated(pageIndex, pageSize, order, category);
+            var products = productLogic.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, category);
             return Ok(products);
         }
 
@@ -52,7 +52,8 @@ namespace TiendaWeb.Controllers
                 Description = product.Description,
                 Price = product.Price.Value,
                 CategoryId = product.CategoryId,
-                Status = product.Status
+                Status = product.Status,
+                ImageUrl = product.ImageUrl,
             });
             return Ok();
         }
@@ -68,7 +69,8 @@ namespace TiendaWeb.Controllers
                 Name = product.Name,
                 Price = product.Price.Value,
                 CategoryId = product.CategoryId,
-                Status = product.Status
+                Status = product.Status,
+                ImageUrl = product.ImageUrl
 
             });
             return Ok();

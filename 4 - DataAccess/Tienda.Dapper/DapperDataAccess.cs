@@ -18,14 +18,15 @@ namespace Tienda.Dapper
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Execute("INSERT INTO dbo.Products (Name, Description, Price, StatusId, CreatedDate, CategoryId) VALUES (@Name, @Description, @Price, @StatusId, @CreatedDate, @CategoryId)", 
+                connection.Execute("INSERT INTO dbo.Products (Name, Description, Price, StatusId, CreatedDate, CategoryId, ImageUrl) VALUES (@Name, @Description, @Price, @StatusId, @CreatedDate, @CategoryId, @ImageUrl)", 
                     new { 
                         Name = product.Name,
                         Description = product.Description,
                         Price = product.Price,
                         StatusId = product.Status,
                         CreatedDate = DateTime.Now,
-                        CategoryId = product.CategoryId
+                        CategoryId = product.CategoryId,
+                        ImageUrl = product.ImageUrl
                     });
             }
         }
@@ -58,7 +59,7 @@ namespace Tienda.Dapper
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Execute("UPDATE dbo.Products SET Name=@Name, Description=@Description, Price=@Price, StatusId=@StatusId, CreatedDate=@CreatedDate, CategoryId=@CategoryId WHERE Id=@ProductId",
+                connection.Execute("UPDATE dbo.Products SET Name=@Name, Description=@Description, Price=@Price, StatusId=@StatusId, CreatedDate=@CreatedDate, CategoryId=@CategoryId, ImageUrl=@ImageUrl WHERE Id=@ProductId",
                     new
                     {
                         ProductId = newProductData.Id,
@@ -67,12 +68,13 @@ namespace Tienda.Dapper
                         Price = newProductData.Price,
                         StatusId = newProductData.Status,
                         CreatedDate = DateTime.Now,
-                        CategoryId = newProductData.CategoryId
+                        CategoryId = newProductData.CategoryId,
+                        ImageUrl = newProductData.ImageUrl
                     });
             }
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, int order, int category)
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, int category)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -81,7 +83,8 @@ namespace Tienda.Dapper
                     {
                         PageIndex = pageIndex,
                         PageSize = pageSize,
-                        Order = order,
+                        OrderBy = orderBy,
+                        OrderDirection = orderDirection,
                         Category = category
                     }, 
                     commandType: CommandType.StoredProcedure).Select(ProductMapper).AsList();
@@ -129,7 +132,8 @@ namespace Tienda.Dapper
                     Price = dbProduct.Price,
                     CreatedDate = dbProduct.CreatedDate,
                     Status = (ProductStatus)dbProduct.StatusId,
-                    CategoryId = dbProduct.CategoryId
+                    CategoryId = dbProduct.CategoryId,
+                    ImageUrl = dbProduct.ImageUrl
                 };
             }
             return null;

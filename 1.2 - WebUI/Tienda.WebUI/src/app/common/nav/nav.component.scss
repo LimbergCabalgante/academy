@@ -6,6 +6,7 @@
     font-family: 'FontAwesome';
     font-weight: normal;
     font-style: normal;
+    padding: 0;
 }
 
 .navbar {
@@ -23,6 +24,11 @@ mat-sidenav-container {
 mat-sidenav {
     background-color: purple;
     width: 200px;
+}
+
+mat-toolbar{
+    position: fixed;
+    z-index: 10000;
 }
 
 .navSpan {
@@ -52,6 +58,10 @@ cursor: pointer;
     .fa-bars{
         font-size: 35px;
 
+    }
+
+    span {
+        padding-right: 0rem;
     }
 
 }

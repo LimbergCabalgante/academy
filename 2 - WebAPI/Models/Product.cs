@@ -20,6 +20,7 @@ namespace TiendaWeb.Models
         public int CategoryId { get; set; }
         [Required]
         public ProductStatus Status { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     public class ProductForList
@@ -28,12 +29,11 @@ namespace TiendaWeb.Models
         public string Name { get; }
         public string Description { get; }
         public decimal Price { get; }
-
         public int CategoryId { get; }
-
         public ProductStatus Status { get; }
+        public string ImageUrl { get; set; }
 
-        public ProductForList(int id, string name, string description, decimal price, int categoryId, ProductStatus status )
+        public ProductForList(int id, string name, string description, decimal price, int categoryId, ProductStatus status, string imageUrl )
         {
             Id = id;
             Name = name;
@@ -41,6 +41,7 @@ namespace TiendaWeb.Models
             Price = price;
             CategoryId = categoryId;
             Status = status;
+            ImageUrl = imageUrl;
         }
     }
 }

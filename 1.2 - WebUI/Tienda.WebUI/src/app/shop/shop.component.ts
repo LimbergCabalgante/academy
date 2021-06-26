@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../common/services/products.service';
 import { Product } from '../common/dtos/product';
+import { ProductParams } from '../common/params/productParams';
+import { Category } from '../common/dtos/category';
 
 @Component({
   selector: 'app-shop',
@@ -7,30 +10,35 @@ import { Product } from '../common/dtos/product';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  products: Product[] = [
+  products: Product[] = [];
+  categories: Category[] = [
     {
-      name : "Nombre del Producto",
-      description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      imageUrl: "https://images-na.ssl-images-amazon.com/images/I/61oQly6YbHL._AC_SL1500_.jpg",
-      price: 20.00
+      id: 0,
+      description: "Comida"
     },
     {
-      name : "Nombre del Producto",
-      description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      imageUrl: "https://images-na.ssl-images-amazon.com/images/I/61oQly6YbHL._AC_SL1500_.jpg",
-      price: 20.00
+      id: 1,
+      description: "Bebida"
     },
-    {
-      name : "Nombre del Producto",
-      description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      imageUrl: "https://images-na.ssl-images-amazon.com/images/I/61oQly6YbHL._AC_SL1500_.jpg",
-      price: 20.00
-    }
-]
+  ];
+  selectedCategory: number;
 
-  constructor() { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
+
+    let productParams: ProductParams = {
+      pageIndex: 1,
+      pageSize: 6,
+      orderBy: "name",
+      orderDirection: 1,
+      category: 0
+    }
+
+    this.productsService.getProductsPaginated(productParams).subscribe(response =>{
+      this.products = response
+    })
+
   }
 
 }
