@@ -13,13 +13,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { CartComponent } from './cart/cart.component';
+import { RangePipe } from '../common/pipes/range.pipe';
 
 @NgModule({
     declarations: [
         ShopComponent,
         ProductComponent,
         ViewProductComponent,
-        CartComponent
+        CartComponent,
+        RangePipe
     ],
     imports: [
         CommonModule,

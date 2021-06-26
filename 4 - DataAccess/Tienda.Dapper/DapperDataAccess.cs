@@ -128,6 +128,16 @@ namespace Tienda.Dapper
             }
         }
 
+        public List<Product> GetProductsByCategory(int category)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query("SELECT * FROM dbo.Products where CategoryId = @Category OR @Category = 0 OR @Category is null", new {
+                    Category = category
+                }).Select(ProductMapper).AsList();
+            }
+        }
+
         private Product ProductMapper(dynamic dbProduct)
         {
             if(dbProduct != null)

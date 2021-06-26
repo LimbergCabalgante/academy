@@ -59,5 +59,10 @@ namespace Tienda.Logic
         {
             return dataAccess.GetCategories();
         }
+
+        public List<Product> GetProductsByCategory(int category)
+        {
+            return dataAccess.GetProductsByCategory(category);
+        }
     }
 }

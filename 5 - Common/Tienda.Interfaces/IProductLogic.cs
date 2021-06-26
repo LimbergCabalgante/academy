@@ -21,6 +21,8 @@ namespace Tienda.Interfaces
         public int ValidateUserInput(int id, string type);
 
         public List<Category> GetCategories();
+
+        public List<Product> GetProductsByCategory(int category);
     }
 
 }

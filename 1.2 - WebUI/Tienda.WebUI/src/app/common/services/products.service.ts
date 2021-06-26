@@ -11,12 +11,16 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getProductsPaginated(productParams){
-    return this.http.get<Product[]>(environment.apiUrl + "Product/pagination", {params: productParams})
+  getCategories(){
+    return this.http.get<Category[]>(environment.apiUrl + "Product/categories");
   }
 
-  getCategories(){
-    return this.http.get<Category[]>(environment.apiUrl + "Product/categories")
+  getProductsByCategory(categoryParams){
+    return this.http.get<Product[]>(environment.apiUrl + "Product/products-by-category", {params: categoryParams});
+  }
+
+  getProductsPaginated(productParams){
+    return this.http.get<Product[]>(environment.apiUrl + "Product/pagination", {params: productParams});
   }
 
 }

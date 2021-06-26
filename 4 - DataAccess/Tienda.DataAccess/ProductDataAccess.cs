@@ -76,5 +76,10 @@ namespace Persistencia
         {
             return GetCategories();
         }
+
+        public List<Product> GetProductsByCategory(int category)
+        {
+            return GetProductsByCategory(category);
+        }
     }
 }

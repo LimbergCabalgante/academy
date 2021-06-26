@@ -96,5 +96,13 @@ namespace TiendaWeb.Controllers
             var categories = productLogic.GetCategories();
             return Ok(categories);
         }
+
+        // GET api/<Product>/products-by-category
+        [HttpGet("products-by-category")]
+        public ActionResult<ProductForList> GetProductsByCategory(int category, [FromServices] IProductLogic productLogic)
+        {
+            var products = productLogic.GetProductsByCategory(category);
+            return Ok(products);
+        }
     }
 }

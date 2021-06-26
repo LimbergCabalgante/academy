@@ -5,6 +5,6 @@
         <p class="product-description">{{ ((product.description?.length > 80) ? (product.description | slice:0:80) + '...' : (product.description)) || "El producto no tiene descripción" }}</p>
     </div>
     <div class="product-price">
-        <b>${{ product.price }}</b>
+        <b>${{ product.price | number : '1.2-2' }}</b>
     </div>
 </div>

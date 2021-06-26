@@ -5,8 +5,27 @@
     <mat-form-field appearance="outline">
         <mat-label>Categoría</mat-label>
         <mat-select [(ngModel)]="selectedCategory">
-            <mat-option *ngFor="let category of categories" [value]="category.id">
+            <mat-option (blur)="getProductsByCategory()" [value]="0">Todas</mat-option>
+            <mat-option (blur)="getProductsByCategory()" *ngFor="let category of categories" [value]="category.id">
                 {{category.description}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Ordenar Por</mat-label>
+        <mat-select [(ngModel)]="selectedOrderBy">
+            <mat-option (blur)="filterProducts()" *ngFor="let orderBy of orderBys" [value]="orderBy.value">
+                {{orderBy.option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <mat-select [(ngModel)]="selectedOrderDirection">
+            <mat-option (blur)="filterProducts()" *ngFor="let orderDirection of orderDirections" [value]="orderDirection.id">
+                {{orderDirection.option}}
             </mat-option>
         </mat-select>
     </mat-form-field>
@@ -17,9 +36,14 @@
         </div>
     </div>
 
+    <div *ngIf="products.length < 1" class="not-found">No se han encontrado productos</div>
+
     <div class="buttons-container">
-    <button mat-raised-button color="primary"> < </button>
-    <button mat-raised-button color="primary"> > </button>
+        <button *ngIf="existingPages > 1" mat-raised-button color="primary" (click)="previousPage()"> < </button>
+        <span *ngFor="let page of existingPages | range, let i = index">
+            <button mat-raised-button color="primary" (click)="goToPage(i + 1)" [ngClass]="{'current-page':currentPage === i + 1}"> {{ i + 1 }} </button>
+        </span>
+        <button *ngIf="existingPages > 1" mat-raised-button color="primary" (click)="nextPage()"> > </button>
     </div>
 
 </div>
