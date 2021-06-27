@@ -8,7 +8,7 @@ namespace Tienda.Interfaces
     {
         Product GetProduct(int id);
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, int category);
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category);
 
         void CreateProduct(Product product);
 
@@ -22,7 +22,7 @@ namespace Tienda.Interfaces
 
         public List<Category> GetCategories();
 
-        public List<Product> GetProductsByCategory(int category);
+        public List<Product> GetProductsByCategory(int category, string search);
     }
 
 }

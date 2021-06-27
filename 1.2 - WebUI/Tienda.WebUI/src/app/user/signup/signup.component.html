@@ -36,7 +36,7 @@
 
     <mat-form-field class="form-item" appearance="outline">
         <mat-label>Contraseña</mat-label>
-            <input type="password" matInput class="form-input" formControlName="password" placeholder="Juancito12345678">
+            <input type="password" matInput class="form-input" (change)="onPasswordChange()" formControlName="password" placeholder="Juancito12345678">
         <mat-error *ngIf="form.get('password').errors?.required">Este campo es requerido</mat-error>
         <mat-error *ngIf="form.get('password').errors?.maxlength">La contraseña no puede exceder los 30 caracteres</mat-error>
         <mat-error *ngIf="form.get('password').errors?.minlength && !form.get('password').errors?.required">La contraseña debe tener al menos 6 caracteres</mat-error>
@@ -44,8 +44,9 @@
 
     <mat-form-field class="form-item" appearance="outline">
         <mat-label>Confirmar Contraseña</mat-label>
-            <input type="password" matInput class="form-input" formControlName="confirmPassword" placeholder="Juancito12345678">
+            <input type="password" matInput class="form-input" (change)="onPasswordChange()" formControlName="confirmPassword" placeholder="Juancito12345678">
         <mat-error *ngIf="form.get('confirmPassword').errors?.required">Este campo es requerido</mat-error>
+        <mat-error *ngIf="confirmPassword.hasError('mismatch') && form.get('confirmPassword').dirty && !form.get('confirmPassword').errors?.required">Las contraseñas ingresadas no coinciden</mat-error>
     </mat-form-field>
 
     <button color="primary" mat-raised-button [disabled]="!form.valid" (click)="sendData()">

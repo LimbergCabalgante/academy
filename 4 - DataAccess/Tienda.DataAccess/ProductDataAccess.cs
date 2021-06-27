@@ -50,9 +50,9 @@ namespace Persistencia
             return ValidateUserInput(id, type);
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, int category)
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
-            return GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, category);
+            return GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
         }
 
         public List<Product> ListProducts()
@@ -77,9 +77,9 @@ namespace Persistencia
             return GetCategories();
         }
 
-        public List<Product> GetProductsByCategory(int category)
+        public List<Product> GetProductsByCategory(int category, string search)
         {
-            return GetProductsByCategory(category);
+            return GetProductsByCategory(category, search);
         }
     }
 }

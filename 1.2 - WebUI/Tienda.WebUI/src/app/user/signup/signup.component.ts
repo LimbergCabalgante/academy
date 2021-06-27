@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 
@@ -23,14 +23,30 @@ export class SignupComponent implements OnInit {
 
     let self = this;
       self.form = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.maxLength(30)]],
-      surname: [null, [Validators.required, Validators.maxLength(30)]],
-      birthDate: [null, [Validators.required]],
-      username: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      confirmPassword: [null, [Validators.required]]
+      name: [[null],[Validators.required, Validators.maxLength(30)]],
+      surname: [[null],[Validators.required, Validators.maxLength(30)]],
+      birthDate: [[null],[Validators.required]],
+      username: [[null],[Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      password: [[null],[Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      confirmPassword: [[null],[Validators.required]]
     });
 
+  }
+
+  onPasswordChange(){
+    if (this.confirmPassword.value == this.password.value) {
+      this.confirmPassword.setErrors(null);
+    } else {
+      this.confirmPassword.setErrors({ mismatch: true });
+    }
+  }
+  
+  get password(): AbstractControl {
+    return this.form.controls['password'];
+  }
+  
+  get confirmPassword(): AbstractControl {
+    return this.form.controls['confirmPassword'];
   }
 
   sendData(){

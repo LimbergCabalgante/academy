@@ -74,7 +74,7 @@ namespace Tienda.Dapper
             }
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, int category)
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -85,6 +85,7 @@ namespace Tienda.Dapper
                         PageSize = pageSize,
                         OrderBy = orderBy,
                         OrderDirection = orderDirection,
+                        Search = search,
                         Category = category
                     }, 
                     commandType: CommandType.StoredProcedure).Select(ProductMapper).AsList();
@@ -128,12 +129,13 @@ namespace Tienda.Dapper
             }
         }
 
-        public List<Product> GetProductsByCategory(int category)
+        public List<Product> GetProductsByCategory(int category, string search)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query("SELECT * FROM dbo.Products where CategoryId = @Category OR @Category = 0 OR @Category is null", new {
-                    Category = category
+                return connection.Query("SELECT * FROM dbo.Products WHERE (([Name] LIKE @Search + '%') OR (@Search = '') OR @Search = 'null' OR (@Search is null)) AND ((CategoryId = @Category) OR (@Category = 0) OR (@Category is null))", new {
+                    Category = category,
+                    Search = search
                 }).Select(ProductMapper).AsList();
             }
         }

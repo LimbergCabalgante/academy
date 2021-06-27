@@ -45,9 +45,9 @@ namespace Tienda.Logic
             return dataAccess.GetProduct(id);
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, int category)
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
-            return this.dataAccess.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, category);
+            return this.dataAccess.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
         }
 
         public int ValidateUserInput(int id, string type)
@@ -60,9 +60,9 @@ namespace Tienda.Logic
             return dataAccess.GetCategories();
         }
 
-        public List<Product> GetProductsByCategory(int category)
+        public List<Product> GetProductsByCategory(int category, string search)
         {
-            return dataAccess.GetProductsByCategory(category);
+            return dataAccess.GetProductsByCategory(category, search);
         }
     }
 }

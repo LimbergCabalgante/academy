@@ -2,17 +2,23 @@
 
     <h1 class="page-title">Productos</h1>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field class="search-input" appearance="outline">
+        <mat-label>Busqueda</mat-label>
+        <input matInput (change)="getPagesInfo()" [formControl]="currentSearch">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="filter-input" appearance="outline">
         <mat-label>Categoría</mat-label>
         <mat-select [(ngModel)]="selectedCategory">
-            <mat-option (blur)="getProductsByCategory()" [value]="0">Todas</mat-option>
-            <mat-option (blur)="getProductsByCategory()" *ngFor="let category of categories" [value]="category.id">
+            <mat-option (blur)="getPagesInfo()" [value]="0">Todas</mat-option>
+            <mat-option (blur)="getPagesInfo()" *ngFor="let category of categories" [value]="category.id">
                 {{category.description}}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field class="filter-input" appearance="outline">
         <mat-label>Ordenar Por</mat-label>
         <mat-select [(ngModel)]="selectedOrderBy">
             <mat-option (blur)="filterProducts()" *ngFor="let orderBy of orderBys" [value]="orderBy.value">
@@ -21,7 +27,7 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field class="filter-input" appearance="outline">
         <mat-label>Dirección</mat-label>
         <mat-select [(ngModel)]="selectedOrderDirection">
             <mat-option (blur)="filterProducts()" *ngFor="let orderDirection of orderDirections" [value]="orderDirection.id">
@@ -30,7 +36,7 @@
         </mat-select>
     </mat-form-field>
 
-    <div class="products-container">    
+    <div class="products-container">
         <div *ngFor="let product of products">
             <app-product [product]="product"></app-product>
         </div>

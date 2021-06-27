@@ -37,9 +37,9 @@ namespace TiendaWeb.Controllers
 
         // GET api/<Product>/pagination
         [HttpGet("pagination")]
-        public ActionResult<ProductForList> Get([Required]int pageIndex, [Required]int pageSize, string orderBy, int orderDirection, int category, [FromServices] IProductLogic productLogic)
+        public ActionResult<ProductForList> Get([Required]int pageIndex, [Required]int pageSize, string orderBy, int orderDirection, string search, int category, [FromServices] IProductLogic productLogic)
         {
-            var products = productLogic.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, category);
+            var products = productLogic.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
             return Ok(products);
         }
 
@@ -99,9 +99,9 @@ namespace TiendaWeb.Controllers
 
         // GET api/<Product>/products-by-category
         [HttpGet("products-by-category")]
-        public ActionResult<ProductForList> GetProductsByCategory(int category, [FromServices] IProductLogic productLogic)
+        public ActionResult<ProductForList> GetProductsByCategory(int category, string search, [FromServices] IProductLogic productLogic)
         {
-            var products = productLogic.GetProductsByCategory(category);
+            var products = productLogic.GetProductsByCategory(category, search);
             return Ok(products);
         }
     }

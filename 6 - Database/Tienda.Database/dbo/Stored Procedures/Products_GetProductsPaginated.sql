@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[Products_GetProductsPaginated]
 	@PageSize INT,
 	@OrderBy VARCHAR(50),
 	@OrderDirection INT,
+	@Search VARCHAR(200),
 	@Category INT
 
 AS
@@ -26,7 +27,7 @@ BEGIN
     SELECT *
 	FROM dbo.Products
 
-	WHERE CategoryId = @Category OR @Category = 0 OR @Category is null
+	WHERE (CategoryId = @Category OR @Category = 0 OR @Category is null) AND ([Name] LIKE @Search + '%' OR @Search = '' OR @Search = 'null' OR @Search is null)
 
 	ORDER BY
 		CASE WHEN @OrderBy = 'name' AND @OrderDirection = 0 THEN [Name] END ASC,

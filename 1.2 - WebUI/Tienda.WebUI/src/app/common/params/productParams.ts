@@ -3,6 +3,7 @@ export class ProductParams {
     pageSize: number;
     orderBy: string;
     orderDirection: number;
+    search: string;
     category: number;
 
 }

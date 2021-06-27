@@ -4,6 +4,7 @@ import { Category } from '../common/dtos/category';
 import { CategoryParams } from '../common/params/categoryParams';
 import { Product } from '../common/dtos/product';
 import { ProductParams } from '../common/params/productParams';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
@@ -11,6 +12,8 @@ import { ProductParams } from '../common/params/productParams';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  currentSearch = new FormControl();
+
   categories: Category[] = [];
   selectedCategory: number = 0;
 
@@ -31,7 +34,7 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.getProductsByCategory();
+    this.getPagesInfo();
   }
 
   // -Requests-
@@ -43,14 +46,17 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  //Gets All Products In Current Category
-  getProductsByCategory(){
+  //Gets All Products in the Current Category that Match the Current Search
+  getPagesInfo(){
     let categoryParams: CategoryParams = {
-      category: this.selectedCategory
+      category: this.selectedCategory,
+      search: this.currentSearch.value
     }
 
+    console.log(categoryParams);
     this.productsService.getProductsByCategory(categoryParams).subscribe(products=>{
       this.totalProductsByCategory = products;
+      console.log(this.totalProductsByCategory);
       this.filterProducts();
     })
   }
@@ -62,6 +68,7 @@ export class ShopComponent implements OnInit {
       pageSize: 8,
       orderBy: this.selectedOrderBy,
       orderDirection: this.selectedOrderDirection,
+      search: this.currentSearch.value,
       category: this.selectedCategory,
     }
 
@@ -82,6 +89,7 @@ export class ShopComponent implements OnInit {
         pageSize: 8,
         orderBy: this.selectedOrderBy,
         orderDirection: this.selectedOrderDirection,
+        search: this.currentSearch.value,
         category: this.selectedCategory,
       }
 
@@ -100,6 +108,7 @@ export class ShopComponent implements OnInit {
         pageSize: 8,
         orderBy: this.selectedOrderBy,
         orderDirection: this.selectedOrderDirection,
+        search: this.currentSearch.value,
         category: this.selectedCategory,
       }
   
@@ -118,6 +127,7 @@ export class ShopComponent implements OnInit {
         pageSize: 8,
         orderBy: this.selectedOrderBy,
         orderDirection: this.selectedOrderDirection,
+        search: this.currentSearch.value,
         category: this.selectedCategory,
       }
 
