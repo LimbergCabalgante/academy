@@ -15,15 +15,14 @@ export class LoginComponent implements OnInit {
 
     let self = this;
       self.form = this.formBuilder.group({
-      username: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
-      password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
     });
 
   }
 
-  sendData(){
+  sendData(form){
     console.log(this.form.value);
-    this.form.reset;
   }
 
 }

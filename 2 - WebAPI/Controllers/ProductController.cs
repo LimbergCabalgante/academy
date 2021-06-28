@@ -47,7 +47,7 @@ namespace TiendaWeb.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] ProductBase product, [FromServices] IProductLogic productLogic)
         {
-            productLogic.CreateProduct(new Dtos.Product
+            productLogic.CreateProduct(new Product
             {
                 Name = product.Name,
                 Description = product.Description,
@@ -63,7 +63,7 @@ namespace TiendaWeb.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ProductBase product, [FromServices] IProductLogic productLogic)
         {
-            productLogic.UpdateProduct(new Dtos.Product
+            productLogic.UpdateProduct(new Product
             {
                 Id = id,
                 Description = product.Description,

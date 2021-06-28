@@ -13,7 +13,7 @@ namespace Tienda.Logic
 
         public ProductLogic()
         {
-            this.dataAccess = new DapperDataAccess();
+            this.dataAccess = new ProductDapper();
         }
         
         public void CreateProduct(Product product)

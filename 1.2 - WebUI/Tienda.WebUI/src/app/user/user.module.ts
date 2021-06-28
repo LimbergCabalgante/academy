@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     MatDatepickerModule,
     MatMomentDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   exports:[
     LoginComponent,

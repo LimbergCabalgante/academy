@@ -2,19 +2,21 @@
 
 <h1 class="page-title">Inicio de Sesión</h1>
 
-<form name="form" [formGroup]="form" novalidate>
+<form name="form" [formGroup]="form" #formDirective="ngForm" (ngSubmit)="sendData(formDirective)" novalidate>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Usuario</mat-label>
-            <input matInput class="form-input" formControlName="username">
+        <mat-label>Email*</mat-label>
+            <input matInput class="form-input" formControlName="email">
+        <mat-error *ngIf="form.get('email').errors?.required">Este campo es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Contraseña</mat-label>
+        <mat-label>Contraseña*</mat-label>
             <input type="password" matInput class="form-input" formControlName="password">
+        <mat-error *ngIf="form.get('password').errors?.required">Este campo es requerido</mat-error>
     </mat-form-field>
 
-    <button color="primary" mat-raised-button [disabled]="!form.valid" (click)="sendData()">
+    <button type="submit" color="primary" mat-raised-button [disabled]="!form.valid">
     CONFIRMAR
     </button>
 

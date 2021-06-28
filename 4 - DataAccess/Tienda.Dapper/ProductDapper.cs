@@ -10,7 +10,7 @@ using Tienda.Interfaces;
 
 namespace Tienda.Dapper
 {
-    public class DapperDataAccess : IProductLogic
+    public class ProductDapper : IProductLogic
     {
         private readonly string connectionString = "Data Source=.;Initial Catalog=TiendaV2;Integrated Security=True";
 

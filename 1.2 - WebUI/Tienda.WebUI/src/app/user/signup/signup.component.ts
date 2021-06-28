@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { UsersService } from 'src/app/common/services/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +15,7 @@ export class SignupComponent implements OnInit {
   minDate: Moment;
   maxDate: Moment;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -23,22 +25,24 @@ export class SignupComponent implements OnInit {
 
     let self = this;
       self.form = this.formBuilder.group({
-      name: [[null],[Validators.required, Validators.maxLength(30)]],
-      surname: [[null],[Validators.required, Validators.maxLength(30)]],
-      birthDate: [[null],[Validators.required]],
-      username: [[null],[Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      password: [[null],[Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      confirmPassword: [[null],[Validators.required]]
+      name: [null,[Validators.required, Validators.maxLength(30)]],
+      surname: [null,[Validators.required, Validators.maxLength(30)]],
+      birthDate: [null,[Validators.required]],
+      email: [null, [Validators.required, Validators.maxLength(100), Validators.email]],
+      username: [null,[Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      password: [null,[Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      confirmPassword: [null,[Validators.required]]
     });
 
   }
 
-  onPasswordChange(){
+  checkPasswords(){
     if (this.confirmPassword.value == this.password.value) {
       this.confirmPassword.setErrors(null);
     } else {
       this.confirmPassword.setErrors({ mismatch: true });
     }
+    console.log(this.form)
   }
   
   get password(): AbstractControl {
@@ -49,9 +53,18 @@ export class SignupComponent implements OnInit {
     return this.form.controls['confirmPassword'];
   }
 
-  sendData(){
-    console.log(this.form.value);
-    this.form.reset;
+  sendData(form){
+    this.usersService.postUser(this.form.value).subscribe({
+      next: ()=>{
+        this.form.reset();
+        form.resetForm();
+        this.snackBar.open("Registrado con exito", "OK", {panelClass: "success-snackbar"});
+      },
+      error: ()=>{
+        this.snackBar.open("Hubo un error al registrarte...", "OK", {panelClass: "error-snackbar"});
+      }
+    })
   }
+
 
 }

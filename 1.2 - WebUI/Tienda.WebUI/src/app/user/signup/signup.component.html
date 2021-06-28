@@ -2,56 +2,63 @@
 
 <h1 class="page-title">Registro</h1>
 
-<form name="form" [formGroup]="form" novalidate>
+<form name="form" [formGroup]="form" #formDirective="ngForm" (ngSubmit)="sendData(formDirective)" novalidate>
     
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Nombre</mat-label>
-            <input matInput class="form-input" formControlName="name" placeholder="Juan">
-        <mat-error *ngIf="form.get('name').errors?.required">Este campo es requerido</mat-error>
+        <mat-label>Nombre*</mat-label>
+            <input matInput class="form-input" (change)="checkPasswords()" formControlName="name" placeholder="Juan">
+        <mat-error *ngIf="form.get('name').touched">Este campo es requerido</mat-error>
         <mat-error *ngIf="form.get('name').errors?.maxlength">El nombre no puede exceder los 30 caracteres</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Apellido</mat-label>
-            <input matInput class="form-input" formControlName="surname" placeholder="Juanes">
+        <mat-label>Apellido*</mat-label>
+            <input matInput class="form-input" (change)="checkPasswords()" formControlName="surname" placeholder="Juanes">
         <mat-error *ngIf="form.get('surname').errors?.required">Este campo es requerido</mat-error>
         <mat-error *ngIf="form.get('surname').errors?.maxlength">El apellido no puede exceder los 30 caracteres</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Fecha de Nacimiento</mat-label>
-            <input matInput class="form-input" formControlName="birthDate" [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
+        <mat-label>Fecha de Nacimiento*</mat-label>
+            <input matInput class="form-input" (change)="checkPasswords()" formControlName="birthDate" [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="form.get('birthDate').errors?.required">Este campo es requerido</mat-error>
+        <mat-error *ngIf="form.get('birthDate').errors && !form.get('birthDate').errors?.required">El dato introducido no es válido</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Username</mat-label>
-            <input matInput class="form-input" formControlName="username" placeholder="xXJuanJuanesXx">
+        <mat-label>Email*</mat-label>
+            <input matInput class="form-input" (change)="checkPasswords()" formControlName="email" placeholder="juancito@gmail.com">
+        <mat-error *ngIf="form.get('email').errors?.required">Este campo es requerido</mat-error>
+        <mat-error *ngIf="form.get('email').errors?.maxlength">El email no puede exceder los 100 caracteres</mat-error>
+        <mat-error *ngIf="form.get('email').errors?.email && !form.get('email').errors?.required">El email no es correcto</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-item" appearance="outline">
+        <mat-label>Username*</mat-label>
+            <input matInput class="form-input" (change)="checkPasswords()" formControlName="username" placeholder="xXJuanJuanesXx">
         <mat-error *ngIf="form.get('username').errors?.required">Este campo es requerido</mat-error>
         <mat-error *ngIf="form.get('username').errors?.maxlength">El username no puede exceder los 30 caracteres</mat-error>
         <mat-error *ngIf="form.get('username').errors?.minlength && !form.get('username').errors?.required">El username debe tener al menos 6 caracteres</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Contraseña</mat-label>
-            <input type="password" matInput class="form-input" (change)="onPasswordChange()" formControlName="password" placeholder="Juancito12345678">
+        <mat-label>Contraseña*</mat-label>
+            <input type="password" matInput class="form-input" (change)="checkPasswords()" formControlName="password" placeholder="Juancito12345678">
         <mat-error *ngIf="form.get('password').errors?.required">Este campo es requerido</mat-error>
         <mat-error *ngIf="form.get('password').errors?.maxlength">La contraseña no puede exceder los 30 caracteres</mat-error>
         <mat-error *ngIf="form.get('password').errors?.minlength && !form.get('password').errors?.required">La contraseña debe tener al menos 6 caracteres</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-item" appearance="outline">
-        <mat-label>Confirmar Contraseña</mat-label>
-            <input type="password" matInput class="form-input" (change)="onPasswordChange()" formControlName="confirmPassword" placeholder="Juancito12345678">
+        <mat-label>Confirmar Contraseña*</mat-label>
+            <input type="password" matInput class="form-input" (change)="checkPasswords()" formControlName="confirmPassword" placeholder="Juancito12345678">
         <mat-error *ngIf="form.get('confirmPassword').errors?.required">Este campo es requerido</mat-error>
-        <mat-error *ngIf="confirmPassword.hasError('mismatch') && form.get('confirmPassword').dirty && !form.get('confirmPassword').errors?.required">Las contraseñas ingresadas no coinciden</mat-error>
+        <mat-error *ngIf="confirmPassword.hasError('mismatch') && !form.get('confirmPassword').errors?.required">Las contraseñas ingresadas no coinciden</mat-error>
     </mat-form-field>
 
-    <button color="primary" mat-raised-button [disabled]="!form.valid" (click)="sendData()">
-    CONFIRMAR
-    </button>
+    <button type="submit" color="primary" mat-raised-button [disabled]="!form.valid || form.get('confirmPassword').untouched || form.get('password').untouched">CONFIRMAR</button>
 
 </form>
 

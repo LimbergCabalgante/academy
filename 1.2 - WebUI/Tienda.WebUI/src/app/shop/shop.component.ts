@@ -53,10 +53,8 @@ export class ShopComponent implements OnInit {
       search: this.currentSearch.value
     }
 
-    console.log(categoryParams);
     this.productsService.getProductsByCategory(categoryParams).subscribe(products=>{
       this.totalProductsByCategory = products;
-      console.log(this.totalProductsByCategory);
       this.filterProducts();
     })
   }
