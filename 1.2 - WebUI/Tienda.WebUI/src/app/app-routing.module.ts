@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './user/signup/signup.component';
 import { LoginComponent } from './user/login/login.component';
-import { OrdersComponent } from './user/orders/orders.component';
 import { ShopComponent } from './shop/shop.component';
-import { CartComponent } from './shop/cart/cart.component';
+import { CartComponent } from './order-management/cart/cart.component';
+import { OrdersComponent } from './order-management/orders/orders.component';
 
 const routes: Routes = [
 

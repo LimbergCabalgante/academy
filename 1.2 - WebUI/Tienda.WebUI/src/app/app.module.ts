@@ -7,13 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavComponent } from './common/nav/nav.component';
 
-import { UserModule } from './user/user.module';
 import { ShopModule } from './shop/shop.module';
+import { OrderManagementModule } from './order-management/order-management.module';
+import { UserModule } from './user/user.module';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -28,8 +30,9 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatMenuModule,
     MatListModule,
-    UserModule,
-    ShopModule
+    ShopModule,
+    OrderManagementModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

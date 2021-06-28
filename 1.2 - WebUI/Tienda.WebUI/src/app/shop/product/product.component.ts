@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ViewProductComponent } from './view-product/view-product.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/common/dtos/product';
 
 @Component({
@@ -9,13 +11,24 @@ import { Product } from 'src/app/common/dtos/product';
 export class ProductComponent implements OnInit {
   @Input() product: Product
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
   handleImageError(){
     this.product.imageUrl = "../../../../assets/no-product.png"
+  }
+
+  viewProduct(){
+    this.dialog.open(ViewProductComponent,{
+      disableClose: true,
+      autoFocus: false,
+      width: '500px',
+      data: {
+        product: this.product,
+      }
+    });
   }
 
 }

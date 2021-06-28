@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { OrdersComponent } from './orders/orders.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,7 +21,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     SignupComponent,
     LoginComponent,
-    OrdersComponent
   ],
   imports: [
     CommonModule,
@@ -40,8 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   exports:[
     LoginComponent,
-    SignupComponent,
-    OrdersComponent
+    SignupComponent
     ],
   providers: [MatDatepickerModule],
 })

@@ -1,1 +1,17 @@
-<p>view-product works!</p>
+<h2 mat-dialog-title>{{product.product.name}}</h2>
+
+<div class="product-container">
+    <img [src]="product.product.imageUrl">
+    <span class="description">Sobre el producto: {{ ((product.product.description?.length > 225) ? (product.product.description | slice:0:225) + '...' : (product.product.description)) || "El producto no tiene descripción" }}</span>
+</div>
+
+<form name="form" [formGroup]="form" #formDirective="ngForm" (ngSubmit)="sendData(formDirective)" class="cart-controls">
+    <mat-form-field class="quantity" appearance="outline">
+        <mat-label>Cantidad*</mat-label>
+        <input type="number" formControlName="amount" matInput>
+    </mat-form-field>
+    <button type="submit" class="add-button" [disabled]="!form.valid" mat-raised-button color="primary"><mat-icon>add_shopping_cart</mat-icon>Agregar<span class="if-not-mobile"> al carrito</span></button>
+</form>
+
+<button class="close-button" mat-stroked-button mat-dialog-close>Salir</button>
+

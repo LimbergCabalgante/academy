@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Product } from '../dtos/product';
-import { Category } from '../dtos/category';
+import { Category } from '../common/dtos/category';
+import { Product } from '../common/dtos/product';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ShopService {
 
   constructor(private http: HttpClient) { }
 

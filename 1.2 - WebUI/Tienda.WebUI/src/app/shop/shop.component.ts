@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../common/services/products.service';
 import { Category } from '../common/dtos/category';
 import { CategoryParams } from '../common/params/categoryParams';
 import { Product } from '../common/dtos/product';
 import { ProductParams } from '../common/params/productParams';
 import { FormControl } from '@angular/forms';
+import { ShopService } from './shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -12,6 +12,8 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  loading: boolean;
+
   currentSearch = new FormControl();
 
   categories: Category[] = [];
@@ -29,10 +31,11 @@ export class ShopComponent implements OnInit {
   existingPages: number;
   currentPage: number;
 
-  constructor(private productsService: ProductsService) {  
+  constructor(private shopService: ShopService) {  
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.getCategories();
     this.getPagesInfo();
   }
@@ -41,7 +44,7 @@ export class ShopComponent implements OnInit {
 
   // Gets Categories For Input Select
   getCategories(){
-    this.productsService.getCategories().subscribe(categories=>{
+    this.shopService.getCategories().subscribe(categories=>{
       this.categories = categories;
     })
   }
@@ -53,7 +56,7 @@ export class ShopComponent implements OnInit {
       search: this.currentSearch.value
     }
 
-    this.productsService.getProductsByCategory(categoryParams).subscribe(products=>{
+    this.shopService.getProductsByCategory(categoryParams).subscribe(products=>{
       this.totalProductsByCategory = products;
       this.filterProducts();
     })
@@ -70,10 +73,11 @@ export class ShopComponent implements OnInit {
       category: this.selectedCategory,
     }
 
-    this.productsService.getProductsPaginated(productParams).subscribe(products =>{
+    this.shopService.getProductsPaginated(productParams).subscribe(products =>{
       this.products = products;
       this.currentPage = productParams.pageIndex;
       this.existingPages = this.totalProductsByCategory.length / productParams.pageSize;
+      this.loading = false;
     })
   }
 
@@ -91,7 +95,7 @@ export class ShopComponent implements OnInit {
         category: this.selectedCategory,
       }
 
-      this.productsService.getProductsPaginated(productParams).subscribe(products =>{
+      this.shopService.getProductsPaginated(productParams).subscribe(products =>{
         this.products = products;
         this.currentPage = productParams.pageIndex;
       })
@@ -110,7 +114,7 @@ export class ShopComponent implements OnInit {
         category: this.selectedCategory,
       }
   
-      this.productsService.getProductsPaginated(productParams).subscribe(products =>{
+      this.shopService.getProductsPaginated(productParams).subscribe(products =>{
         this.products = products;
         this.currentPage = productParams.pageIndex;
       })
@@ -129,7 +133,7 @@ export class ShopComponent implements OnInit {
         category: this.selectedCategory,
       }
 
-      this.productsService.getProductsPaginated(productParams).subscribe(products =>{
+      this.shopService.getProductsPaginated(productParams).subscribe(products =>{
         this.products = products;
         this.currentPage = productParams.pageIndex;
       })

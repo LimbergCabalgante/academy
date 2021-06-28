@@ -1,4 +1,4 @@
-<div class="container">
+<div (click)="viewProduct()" class="container">
     <div class="product">
         <img class="product-image" [src]="product.imageUrl" (error)="handleImageError()">
         <b class="product-name">{{ (product.name.length > 20) ? (product.name | slice:0:20) + '...' : (product.name) }}</b>

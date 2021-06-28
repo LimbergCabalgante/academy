@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div *ngIf="products.length < 1" class="not-found">No se han encontrado productos</div>
+    <div *ngIf="products.length < 1 && !loading" class="not-found">No se han encontrado productos</div>
 
     <div class="buttons-container">
         <button *ngIf="existingPages > 1" mat-mini-fab color="primary" (click)="previousPage()"> < </button>

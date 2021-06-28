@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { UsersService } from 'src/app/common/services/users.service';
+import { UserService } from '../user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
   minDate: Moment;
   maxDate: Moment;
 
-  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private usersService: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
       next: ()=>{
         this.form.reset();
         form.resetForm();
-        this.snackBar.open("Registrado con exito", "OK", {panelClass: "success-snackbar"});
+        this.snackBar.open("Registrado con exito.", "OK", {panelClass: "success-snackbar"});
       },
       error: ()=>{
         this.snackBar.open("Hubo un error al registrarte...", "OK", {panelClass: "error-snackbar"});
