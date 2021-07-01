@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
   minDate: Moment;
   maxDate: Moment;
 
-  constructor(private formBuilder: FormBuilder, private usersService: UserService, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private usersService: UserService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -42,7 +43,6 @@ export class SignupComponent implements OnInit {
     } else {
       this.confirmPassword.setErrors({ mismatch: true });
     }
-    console.log(this.form)
   }
   
   get password(): AbstractControl {
@@ -59,6 +59,7 @@ export class SignupComponent implements OnInit {
         this.form.reset();
         form.resetForm();
         this.snackBar.open("Registrado con exito.", "OK", {panelClass: "success-snackbar"});
+        this.router.navigate(['/login']);
       },
       error: ()=>{
         this.snackBar.open("Hubo un error al registrarte...", "OK", {panelClass: "error-snackbar"});

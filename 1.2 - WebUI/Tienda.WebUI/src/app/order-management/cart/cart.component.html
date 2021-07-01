@@ -2,4 +2,19 @@
 
     <h1 class="page-title">Carrito de Compras</h1>
 
+    <div *ngFor="let product of productsInCart">
+        <div class="product-container">
+            <span class="name">{{ (product.name.length > 20) ? (product.name | slice:0:20) + '...' : (product.name) }}</span>
+            <mat-form-field class="quantity" appearance="outline">
+            <mat-label>Cantidad*</mat-label>
+            <input type="number" matInput [value]="product.quantity">
+            </mat-form-field>
+            <span class="subtotal">Subtotal: ${{product.quantity * product.unitPrice | number : '1.2-2'}}</span>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+
+    <p class="total">Total: $</p>
+    <button mat-raised-button color="primary" (click)="sendData()">CONFIMAR</button>
+
 </div>

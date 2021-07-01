@@ -9,11 +9,58 @@
     margin-top: 24px;
 }
 
+.product-container{
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.name, .quantity, .subtotal{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.quantity{
+    width: 100px;
+    margin-top: 16px;
+}
+
+.subtotal{
+    justify-self: flex-end;
+    margin-left: auto;
+}
+
+.total{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+button{
+    width: 100%;
+}
+
 @media screen and (min-width: 1100px) {
     
     .page-container{
         margin-left: 25%;
         margin-right: 25%;
+    }
+
+    button{
+        width: 60%;
+        margin-left: 20%,
+    }
+    
+}
+
+@media screen and (max-width: 700px) {
+    
+    .quantity{
+        width: 70px;
     }
     
 }
