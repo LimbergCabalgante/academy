@@ -17,6 +17,8 @@ export class ViewProductComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log(this.product.product);
+
     let self = this;
       self.form = this.formBuilder.group({
         product: this.product.product.id,
@@ -25,7 +27,7 @@ export class ViewProductComponent implements OnInit {
 
   }
 
-  sendData(form){
+  AddProduct(form){
     this.orderManagementService.addItemToCart(this.product.product, this.form.get('amount').value);
     this.snackBar.open("Has añadido " + this.product.product.name.toLowerCase() + " (x" + this.form.get('amount').value + ")" + " a tu carrito.", "OK", {panelClass: "success-snackbar"});
     form.resetForm();

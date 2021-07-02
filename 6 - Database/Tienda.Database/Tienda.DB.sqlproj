@@ -76,5 +76,6 @@
     <Build Include="dbo\Stored Procedures\Products_GetProductsPaginated.sql" />
     <Build Include="dbo\Stored Procedures\Orders_GetPaidOrdersWithMoreThanThreeLines.sql" />
     <Build Include="dbo\Stored Procedures\Categories_GetActiveProducts.sql" />
+    <Build Include="dbo\Stored Procedures\Products_GetProductsPaginated2.sql" />
   </ItemGroup>
 </Project>

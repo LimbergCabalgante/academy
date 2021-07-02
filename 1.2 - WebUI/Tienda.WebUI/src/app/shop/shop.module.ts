@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTooltipModule
     ],
     exports: [
         ShopComponent,

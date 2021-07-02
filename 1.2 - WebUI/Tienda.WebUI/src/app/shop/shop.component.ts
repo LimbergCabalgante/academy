@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../common/dtos/category';
 import { Product } from '../common/dtos/product';
-import { ProductParams } from '../common/params/productParams';
 import { FormControl } from '@angular/forms';
 import { ShopService } from './shop.service';
 
@@ -41,16 +40,12 @@ export class ShopComponent implements OnInit {
     this.loading = false;
   }
 
-  // -Requests-
-
-  // Gets Categories For Input Select
   getCategories(){
     this.shopService.getCategories().subscribe(categories=>{
       this.categories = categories;
     })
   }
 
-  // Applies All Filters
   filterProducts(){
     let productParams = this.buildPagingData();
 
@@ -59,9 +54,6 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  // -Page Navigation-
-
-  // Next
   nextPage(){
     if(this.currentPage < this.existingPages){
       this.currentPage ++;
@@ -69,7 +61,6 @@ export class ShopComponent implements OnInit {
       }
   }
 
-  // Previous
   previousPage(){
     if(this.currentPage > 1){
       this.currentPage --;
@@ -77,7 +68,6 @@ export class ShopComponent implements OnInit {
     }
   }
   
-  // By Id
   goToPage(page){
     this.currentPage = page;
     this.filterProducts();
@@ -88,14 +78,14 @@ export class ShopComponent implements OnInit {
     this.existingPages = result.productCount / this.pageSize;
   }
 
-  buildPagingData(): ProductParams{
+  buildPagingData(){
     return {
       pageIndex: this.currentPage,
       pageSize: this.pageSize,
       orderBy: this.selectedOrderBy,
       orderDirection: this.selectedOrderDirection,
       search: this.currentSearch.value,
-      category: this.selectedCategory,
+      category: this.selectedCategory
     }
   }
   

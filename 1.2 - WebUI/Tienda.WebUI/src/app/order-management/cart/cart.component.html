@@ -4,17 +4,20 @@
 
     <div *ngFor="let cartEntry of cart.cartEntries">
         <div class="product-container">
-            <span class="name">{{ (cartEntry.product.name.length > 20) ? (cartEntry.product.name | slice:0:20) + '...' : (cartEntry.product.name) }}</span>
             <mat-form-field class="quantity" appearance="outline">
-            <mat-label>Cantidad*</mat-label>
-            <input type="number" matInput [value]="cartEntry.quantity">
+                <mat-label>Cantidad*</mat-label>
+                <input type="number" matInput [(ngModel)]="cartEntry.quantity" min="1" (change)="updateItemQuantity(cartEntry.product.id, this.cartEntry.quantity)">
             </mat-form-field>
+            <span class="name">{{ (cartEntry.product.name.length > 20) ? (cartEntry.product.name | slice:0:20) + '...' : (cartEntry.product.name) }}</span>
             <span class="subtotal">Subtotal: ${{cartEntry.quantity * cartEntry.product.price | number : '1.2-2'}}</span>
+            <mat-icon class="delete" (click)="removeItemFromCart(cartEntry.product)">clear</mat-icon>
         </div>
         <mat-divider></mat-divider>
     </div>
 
-    <p class="total">Total: $</p>
-    <button mat-raised-button color="primary" (click)="sendData()">CONFIMAR</button>
+    <p class="empty" *ngIf="cart.cartEntries.length == 0">Actualmente no hay nada en tu carrito.</p>
+
+    <p class="total">Total: ${{totalPrice | number : '1.2-2' || 0}}</p>
+    <button mat-raised-button color="primary" [disabled]="cart.cartEntries.length == 0 || !areItemsValid()" (click)="createOrder()">CONFIMAR</button>
 
 </div>

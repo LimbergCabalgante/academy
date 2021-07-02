@@ -3,15 +3,20 @@
 <div class="product-container">
     <img [src]="product.product.imageUrl">
     <span class="description">Sobre el producto: {{ ((product.product.description?.length > 225) ? (product.product.description | slice:0:225) + '...' : (product.product.description)) || "El producto no tiene descripción" }}</span>
+    <span class="error-description" *ngIf="product.product.status == 2">*Este producto no se encuentra disponible actualmente.</span>
+    <span class="error-description" *ngIf="product.product.status == 3">*Este producto está agotado actualmente.</span>
 </div>
 
-<form name="form" [formGroup]="form" #formDirective="ngForm" (ngSubmit)="sendData(formDirective)" class="cart-controls">
-    <mat-form-field class="quantity" appearance="outline">
+<form name="form" [formGroup]="form" #formDirective="ngForm" (ngSubmit)="AddProduct(formDirective)" class="cart-controls">
+    <mat-form-field *ngIf="product.product.status != 2 && product.product.status != 3" class="quantity" appearance="outline">
         <mat-label>Cantidad*</mat-label>
         <input type="number" formControlName="amount" matInput>
     </mat-form-field>
-    <button type="submit" class="add-button" [disabled]="!form.valid" mat-raised-button color="primary"><mat-icon>add_shopping_cart</mat-icon>AGREGAR<span class="if-not-mobile"> AL CARRITO</span></button>
+    <mat-form-field *ngIf="product.product.status == 2 || product.product.status == 3" class="quantity" appearance="outline">
+        <mat-label>N/A</mat-label>
+        <input type="number" disabled matInput>
+    </mat-form-field>
+    <button [disabled]="!form.valid || product.product.status == 2 || product.product.status == 3" type="submit" class="add-button" mat-dialog-close mat-raised-button color="primary"><mat-icon class="if-not-mobile">add_shopping_cart</mat-icon>AGREGAR<span class="if-not-mobile"> AL CARRITO</span></button>
 </form>
 
 <button class="close-button" mat-stroked-button mat-dialog-close>Salir</button>
-

@@ -36,7 +36,7 @@ export class OrderManagementService {
         
     }
 
-    RemoveItemFromCart(product: Product){
+    removeItemFromCart(product: Product){
         if(this.cart){
             this.cart.cartEntries.forEach((p, i)=>{
                 if(p.product.id == product.id){
