@@ -74,22 +74,24 @@ namespace Tienda.Dapper
             }
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
+        public ProductsWithPageCount GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
+            var result = new ProductsWithPageCount();
+
+            var dynamic = new DynamicParameters();
+            dynamic.Add("@PageIndex", pageIndex);
+            dynamic.Add("@PageSize", pageSize);
+            dynamic.Add("@OrderBy", orderBy);
+            dynamic.Add("@OrderDirection", orderDirection);
+            dynamic.Add("@Search", search);
+            dynamic.Add("@Category", category);
+            dynamic.Add("@ProductCount", 0, DbType.Int32, ParameterDirection.Output);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query("dbo.Products_GetProductsPaginated",
-                    new
-                    {
-                        PageIndex = pageIndex,
-                        PageSize = pageSize,
-                        OrderBy = orderBy,
-                        OrderDirection = orderDirection,
-                        Search = search,
-                        Category = category
-                    }, 
-                    commandType: CommandType.StoredProcedure).Select(ProductMapper).AsList();
+                result.Products = connection.Query("dbo.Products_GetProductsPaginated2", dynamic, commandType: CommandType.StoredProcedure).Select(ProductMapper).AsList();
+                result.ProductCount = dynamic.Get<int>("ProductCount");
             }
+            return result;
         }
 
         public int ValidateUserInput(int id, string type)

@@ -2,14 +2,14 @@
 
     <h1 class="page-title">Carrito de Compras</h1>
 
-    <div *ngFor="let product of productsInCart">
+    <div *ngFor="let cartEntry of cart.cartEntries">
         <div class="product-container">
-            <span class="name">{{ (product.name.length > 20) ? (product.name | slice:0:20) + '...' : (product.name) }}</span>
+            <span class="name">{{ (cartEntry.product.name.length > 20) ? (cartEntry.product.name | slice:0:20) + '...' : (cartEntry.product.name) }}</span>
             <mat-form-field class="quantity" appearance="outline">
             <mat-label>Cantidad*</mat-label>
-            <input type="number" matInput [value]="product.quantity">
+            <input type="number" matInput [value]="cartEntry.quantity">
             </mat-form-field>
-            <span class="subtotal">Subtotal: ${{product.quantity * product.unitPrice | number : '1.2-2'}}</span>
+            <span class="subtotal">Subtotal: ${{cartEntry.quantity * cartEntry.product.price | number : '1.2-2'}}</span>
         </div>
         <mat-divider></mat-divider>
     </div>

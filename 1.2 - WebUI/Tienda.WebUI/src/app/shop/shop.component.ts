@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../common/dtos/category';
-import { CategoryParams } from '../common/params/categoryParams';
 import { Product } from '../common/dtos/product';
 import { ProductParams } from '../common/params/productParams';
 import { FormControl } from '@angular/forms';
@@ -28,8 +27,9 @@ export class ShopComponent implements OnInit {
   products: Product[] = [];
   totalProductsByCategory: Product[] = [];
 
+  pageSize: number = 8;
   existingPages: number;
-  currentPage: number;
+  currentPage: number = 1;
 
   constructor(private shopService: ShopService) {  
   }
@@ -37,7 +37,8 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.getCategories();
-    this.getPagesInfo();
+    this.filterProducts();
+    this.loading = false;
   }
 
   // -Requests-
@@ -49,35 +50,12 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  //Gets All Products in the Current Category that Match the Current Search
-  getPagesInfo(){
-    let categoryParams: CategoryParams = {
-      category: this.selectedCategory,
-      search: this.currentSearch.value
-    }
-
-    this.shopService.getProductsByCategory(categoryParams).subscribe(products=>{
-      this.totalProductsByCategory = products;
-      this.filterProducts();
-    })
-  }
-
   // Applies All Filters
   filterProducts(){
-    let productParams: ProductParams = {
-      pageIndex: 1,
-      pageSize: 8,
-      orderBy: this.selectedOrderBy,
-      orderDirection: this.selectedOrderDirection,
-      search: this.currentSearch.value,
-      category: this.selectedCategory,
-    }
+    let productParams = this.buildPagingData();
 
-    this.shopService.getProductsPaginated(productParams).subscribe(products =>{
-      this.products = products;
-      this.currentPage = productParams.pageIndex;
-      this.existingPages = this.totalProductsByCategory.length / productParams.pageSize;
-      this.loading = false;
+    this.shopService.getProductsPaginated(productParams).subscribe(result =>{
+      this.getPagesInfo(result)
     })
   }
 
@@ -86,57 +64,38 @@ export class ShopComponent implements OnInit {
   // Next
   nextPage(){
     if(this.currentPage < this.existingPages){
-      let productParams: ProductParams = {
-        pageIndex: this.currentPage + 1,
-        pageSize: 8,
-        orderBy: this.selectedOrderBy,
-        orderDirection: this.selectedOrderDirection,
-        search: this.currentSearch.value,
-        category: this.selectedCategory,
+      this.currentPage ++;
+      this.filterProducts()
       }
-
-      this.shopService.getProductsPaginated(productParams).subscribe(products =>{
-        this.products = products;
-        this.currentPage = productParams.pageIndex;
-      })
-    }
   }
 
   // Previous
   previousPage(){
     if(this.currentPage > 1){
-      let productParams: ProductParams = {
-        pageIndex: this.currentPage - 1,
-        pageSize: 8,
-        orderBy: this.selectedOrderBy,
-        orderDirection: this.selectedOrderDirection,
-        search: this.currentSearch.value,
-        category: this.selectedCategory,
-      }
-  
-      this.shopService.getProductsPaginated(productParams).subscribe(products =>{
-        this.products = products;
-        this.currentPage = productParams.pageIndex;
-      })
+      this.currentPage --;
+      this.filterProducts();
     }
   }
   
   // By Id
   goToPage(page){
-    if(this.currentPage != page){
-      let productParams: ProductParams = {
-        pageIndex: page,
-        pageSize: 8,
-        orderBy: this.selectedOrderBy,
-        orderDirection: this.selectedOrderDirection,
-        search: this.currentSearch.value,
-        category: this.selectedCategory,
-      }
+    this.currentPage = page;
+    this.filterProducts();
+  }
 
-      this.shopService.getProductsPaginated(productParams).subscribe(products =>{
-        this.products = products;
-        this.currentPage = productParams.pageIndex;
-      })
+  getPagesInfo(result){
+    this.products = result.products;
+    this.existingPages = result.productCount / this.pageSize;
+  }
+
+  buildPagingData(): ProductParams{
+    return {
+      pageIndex: this.currentPage,
+      pageSize: this.pageSize,
+      orderBy: this.selectedOrderBy,
+      orderDirection: this.selectedOrderDirection,
+      search: this.currentSearch.value,
+      category: this.selectedCategory,
     }
   }
   

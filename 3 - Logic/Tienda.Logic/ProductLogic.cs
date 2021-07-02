@@ -3,6 +3,7 @@ using Persistencia;
 using System;
 using System.Collections.Generic;
 using Tienda.Dapper;
+using Tienda.Dto;
 using Tienda.Interfaces;
 
 namespace Tienda.Logic
@@ -45,7 +46,7 @@ namespace Tienda.Logic
             return dataAccess.GetProduct(id);
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
+        public ProductsWithPageCount GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
             return this.dataAccess.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
         }

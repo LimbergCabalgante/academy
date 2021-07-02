@@ -4,15 +4,15 @@
 
     <mat-form-field class="search-input" appearance="outline">
         <mat-label>Busqueda</mat-label>
-        <input matInput (change)="getPagesInfo()" [formControl]="currentSearch">
+        <input matInput (change)="goToPage(1)" [formControl]="currentSearch">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="filter-input" appearance="outline">
         <mat-label>Categoría</mat-label>
         <mat-select [(ngModel)]="selectedCategory">
-            <mat-option (blur)="getPagesInfo()" [value]="0">Todas</mat-option>
-            <mat-option (blur)="getPagesInfo()" *ngFor="let category of categories" [value]="category.id">
+            <mat-option (blur)="goToPage(1)" [value]="0">Todas</mat-option>
+            <mat-option (blur)="goToPage(1)" *ngFor="let category of categories" [value]="category.id">
                 {{category.description}}
             </mat-option>
         </mat-select>
@@ -21,7 +21,7 @@
     <mat-form-field class="filter-input" appearance="outline">
         <mat-label>Ordenar Por</mat-label>
         <mat-select [(ngModel)]="selectedOrderBy">
-            <mat-option (blur)="filterProducts()" *ngFor="let orderBy of orderBys" [value]="orderBy.value">
+            <mat-option (blur)="goToPage(1)" *ngFor="let orderBy of orderBys" [value]="orderBy.value">
                 {{orderBy.option}}
             </mat-option>
         </mat-select>
@@ -30,7 +30,7 @@
     <mat-form-field class="filter-input" appearance="outline">
         <mat-label>Dirección</mat-label>
         <mat-select [(ngModel)]="selectedOrderDirection">
-            <mat-option (blur)="filterProducts()" *ngFor="let orderDirection of orderDirections" [value]="orderDirection.id">
+            <mat-option (blur)="goToPage(1)" *ngFor="let orderDirection of orderDirections" [value]="orderDirection.id">
                 {{orderDirection.option}}
             </mat-option>
         </mat-select>

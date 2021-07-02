@@ -50,7 +50,7 @@ namespace Persistencia
             return ValidateUserInput(id, type);
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
+        public ProductsWithPageCount GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
             return GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
         }
