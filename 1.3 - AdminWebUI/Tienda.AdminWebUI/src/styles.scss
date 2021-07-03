@@ -1,2 +1,22 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+snack-bar-container.success-snackbar{
+    background: rgb(0, 128, 0);
+    color: rgb(255, 255, 255);
+
+    .mat-simple-snackbar-action {
+        color: rgb(255, 255, 255);
+    }
+
+}
+
+snack-bar-container.error-snackbar{
+    background: rgb(219, 20, 60);
+    color: rgb(255, 255, 255);
+
+    .mat-simple-snackbar-action {
+        color: rgb(255, 255, 255);
+    }
+
+}

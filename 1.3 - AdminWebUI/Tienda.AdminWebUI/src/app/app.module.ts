@@ -10,13 +10,15 @@ import { OrdersComponent } from './orders/orders.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { ConfirmationDialogComponent } from './orders/order/confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdersComponent,
-    OrderComponent
+    OrderComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatTooltipModule
+    MatSnackBarModule
+  ],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
   ],
   bootstrap: [AppComponent]
 })

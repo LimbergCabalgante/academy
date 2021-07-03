@@ -11,16 +11,16 @@ namespace Tienda.Logic
 {
     public class UserLogic : IUserLogic
     {
-        public IUserLogic dataAccess { get; }
+        public IUserLogic DataAccess { get; }
 
         public UserLogic()
         {
-            this.dataAccess = new UserDapper();
+            this.DataAccess = new UserDapper();
         }
 
         public void CreateUser(User user)
         {
-            this.dataAccess.CreateUser(user);
+            this.DataAccess.CreateUser(user);
         }
     }
 }

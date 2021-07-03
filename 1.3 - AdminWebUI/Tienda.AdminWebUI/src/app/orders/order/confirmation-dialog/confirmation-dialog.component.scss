@@ -1,0 +1,28 @@
+p{
+    text-align: justify;
+    width: 180px;
+}
+
+.actions{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.true, .false, .back{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.true{
+    color: rgb(0, 128, 0);
+}
+
+.false{
+    color: rgb(219, 20, 60);
+}
+
+.back{
+    color: rgb(180, 180, 180);
+}

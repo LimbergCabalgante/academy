@@ -1,5 +1,13 @@
 button{
-    margin: auto;
     width: 40%;
+    margin: auto;
+    
+}
+
+@media screen and (max-width: 500px) {
+    
+    span{
+        display: none;
+    }
     
 }

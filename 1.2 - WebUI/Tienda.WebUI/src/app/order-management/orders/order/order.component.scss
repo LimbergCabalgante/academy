@@ -5,6 +5,7 @@
     width: 90%;
     padding: 10px;
     margin-top: 20px;
+    margin-bottom: 24px;
     border-radius: 20px;
     background-color: rgb(245, 245, 245);
     color: rgb(103, 58, 183);
@@ -31,3 +32,12 @@
 .status-hmmm{
     color: rgb(180, 180, 180);
 }
+
+@media screen and (max-width: 300px) {
+    
+    .if-not-galaxy-fold{
+        display: none;
+    }
+    
+}
+

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/common/dtos/cart';
+import { Order } from 'src/app/common/dtos/order';
 import { OrderManagementService } from '../order-management.service';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { DeletionConfirmationDialogComponent } from './deletion-confirmation-dialog/deletion-confirmation-dialog.component';
@@ -67,16 +68,23 @@ export class CartComponent implements OnInit {
       autoFocus: false
     })
     dialogRef.afterClosed().subscribe(result => {
-
       if(result == "true"){
-        console.log(this.cart);
-        this.orderManagementService.clearCart();
-        this.snackBar.open("Orden concretada. Gracias por su compra.", "OK", {panelClass: "success-snackbar"});
-        this.cart = this.orderManagementService.cart;
-        this.totalPrice = 0;
-        this.router.navigate(["/orders"])
+        let order: Order = {
+          totalPrice: this.totalPrice
+        }
+        this.orderManagementService.createOrder(order).subscribe({
+          next: ()=>{
+            this.orderManagementService.clearCart();
+            this.snackBar.open("Orden concretada. Gracias por su compra.", "OK", {panelClass: "success-snackbar"});
+            this.cart = this.orderManagementService.cart;
+            this.totalPrice = 0;
+            this.router.navigate(["/orders"])
+          },
+          error: ()=>{
+            this.snackBar.open("Hubo un error al concretar la orden...", "OK", {panelClass: "error-snackbar"});
+          }
+        })
       }
-
     });
   }
 

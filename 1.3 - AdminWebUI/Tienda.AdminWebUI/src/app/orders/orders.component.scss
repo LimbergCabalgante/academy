@@ -1,3 +1,8 @@
+.page-container{
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
 .page-title{
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: bold;
@@ -13,8 +18,8 @@
 @media screen and (min-width: 1100px) {
     
     .page-container{
-        margin-left: 25%;
-        margin-right: 25%;
+        margin-left: 25vw;
+        margin-right: 25vw;
     }
     
 }

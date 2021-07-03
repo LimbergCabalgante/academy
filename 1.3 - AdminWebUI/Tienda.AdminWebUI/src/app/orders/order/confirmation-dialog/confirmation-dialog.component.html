@@ -1,0 +1,9 @@
+<p><b>Cliente: </b>{{order.order.userFullName || "Desconocido"}}</p>
+<p><b>Fecha: </b>{{order.order.createdDate | date:'M/d/yy, h:mm a'}}</p>
+<p><b>Precio total: </b>${{order.order.totalPrice | number : '1.2-2'}}</p>
+
+<div class="actions">
+    <mat-icon class="true" mat-mini-fab mat-dialog-close [mat-dialog-close]="2">check_circle</mat-icon>
+    <mat-icon class="back" mat-mini-fab mat-dialog-close>pause_circle_filled</mat-icon>
+    <mat-icon class="false" mat-mini-fab mat-dialog-close [mat-dialog-close]="3">cancel</mat-icon>
+</div>

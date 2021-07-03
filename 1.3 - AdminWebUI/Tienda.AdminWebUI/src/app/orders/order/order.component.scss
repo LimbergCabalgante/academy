@@ -32,3 +32,11 @@
     color: rgb(180, 180, 180);
     cursor: pointer;
 }
+
+@media screen and (max-width: 300px) {
+    
+    .if-not-galaxy-fold{
+        display: none;
+    }
+    
+}

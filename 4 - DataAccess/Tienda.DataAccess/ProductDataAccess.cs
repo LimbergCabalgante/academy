@@ -65,7 +65,7 @@ namespace Persistencia
                 Price = p.Price
             }).ToList();
             
-    }
+        }
 
         public Product GetProduct(int id)
         {

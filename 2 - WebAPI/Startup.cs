@@ -48,7 +48,8 @@ namespace TiendaWeb
             });
           
             services.AddScoped<IProductLogic, ProductLogic>();
-            services.AddScoped<IUserLogic, UserLogic>(); 
+            services.AddScoped<IUserLogic, UserLogic>();
+            services.AddScoped<IOrderLogic, OrderLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

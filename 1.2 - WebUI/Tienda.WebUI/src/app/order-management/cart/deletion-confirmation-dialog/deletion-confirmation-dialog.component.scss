@@ -1,6 +1,6 @@
 button{
-    margin: auto;
     width: 40%;
+    margin: auto;
     
 }
 
@@ -8,4 +8,12 @@ button{
     background-color: rgb(220, 20, 60);
     color: rgb(255, 255, 255);
 
+}
+
+@media screen and (max-width: 500px) {
+    
+    span{
+        display: none;
+    }
+    
 }

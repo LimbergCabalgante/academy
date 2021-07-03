@@ -1,8 +1,9 @@
 export class Order {
-    id: number;
+    id?: number;
     billingNumber?: number;
-    createdDate: Date;
+    createdDate?: Date;
     userId?: number;
-    statusId: number;
+    userFullName?: string;
+    statusId?: number;
     totalPrice: number;
 }

@@ -1,7 +1,7 @@
 <div class="order mat-elevation-z2">
-  <span class="info">{{order.createdDate | date:'M/d/yy, h:mm a'}},</span>
-  <span class="info"> ${{order.totalPrice | number : '1.2-2'}}</span>
-  <mat-icon matTooltip="Pendiente de aprobación" class="status-hmmm" *ngIf="order.statusId == 1" (click)="changeStatus()">pause_circle_filled</mat-icon>
+  <span class="info">{{order.createdDate | date:'M/d/yy, h:mm a'}}</span>
+  <span class="info if-not-galaxy-fold"> | ${{order.totalPrice | number : '1.2-2'}}</span>
+  <mat-icon matTooltip="Pendiente de aprobación" class="status-hmmm" *ngIf="order.statusId == 1" (click)="updateOrderStatus()">pause_circle_filled</mat-icon>
   <mat-icon matTooltip="Aprobada" class="status-ok" *ngIf="order.statusId == 2">check_circle</mat-icon>
   <mat-icon matTooltip="Denegada" class="status-nope" *ngIf="order.statusId == 3">cancel</mat-icon>
 </div>

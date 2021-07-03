@@ -10,60 +10,60 @@ namespace Tienda.Logic
 {
     public class ProductLogic: IProductLogic
     {
-        public IProductLogic dataAccess { get; }
+        public IProductLogic DataAccess { get; }
 
         public ProductLogic()
         {
-            this.dataAccess = new ProductDapper();
+            this.DataAccess = new ProductDapper();
         }
         
         public void CreateProduct(Product product)
         {
-            this.dataAccess.CreateProduct(product);
+            this.DataAccess.CreateProduct(product);
         }
         
         public List<Product> ListProducts()
         {
-            return this.dataAccess.ListProducts();
+            return this.DataAccess.ListProducts();
         }
         
         public bool DeleteProduct(int id)
         {
-            if(dataAccess.GetProduct(id) != null)
+            if(DataAccess.GetProduct(id) != null)
             {
-                return dataAccess.DeleteProduct(id);
+                return DataAccess.DeleteProduct(id);
             }
             return false;
         }
 
         public void UpdateProduct(Product newProductData)
         {
-            dataAccess.UpdateProduct(newProductData);
+            DataAccess.UpdateProduct(newProductData);
         }
 
         public Product GetProduct(int id)
         {
-            return dataAccess.GetProduct(id);
+            return DataAccess.GetProduct(id);
         }
 
         public ProductsWithPageCount GetProductsPaginated(int pageIndex, int pageSize, string orderBy, int orderDirection, string search, int category)
         {
-            return this.dataAccess.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
+            return this.DataAccess.GetProductsPaginated(pageIndex, pageSize, orderBy, orderDirection, search, category);
         }
 
         public int ValidateUserInput(int id, string type)
         {
-            return dataAccess.ValidateUserInput(id, type);
+            return DataAccess.ValidateUserInput(id, type);
         }
 
         public List<Category> GetCategories()
         {
-            return dataAccess.GetCategories();
+            return DataAccess.GetCategories();
         }
 
         public List<Product> GetProductsByCategory(int category, string search)
         {
-            return dataAccess.GetProductsByCategory(category, search);
+            return DataAccess.GetProductsByCategory(category, search);
         }
     }
 }

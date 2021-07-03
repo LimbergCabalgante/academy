@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Cart } from '../common/dtos/cart';
 import { Product } from '../common/dtos/product';
 import { CartEntry } from '../common/dtos/cartEntry';
+import { Order } from '../common/dtos/order';
 
 @Injectable({
     providedIn: 'root'
@@ -73,6 +74,14 @@ export class OrderManagementService {
 
     persistCart(){
         localStorage.setItem("Cart", JSON.stringify(this.cart));
+    }
+
+    createOrder(order){
+        return this.http.post(environment.apiUrl + "Order", order);
+    }
+
+    getOrders(){
+        return this.http.get<Order[]>(environment.apiUrl + "Order");
     }
 
 }
