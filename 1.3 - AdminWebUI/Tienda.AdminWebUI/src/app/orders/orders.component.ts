@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/common/dtos/order';
+import { Order } from './order/order';
+import { OrdersService } from './orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -9,23 +10,26 @@ import { Order } from 'src/app/common/dtos/order';
 export class OrdersComponent implements OnInit {
   orders: Order[] = [
     {
+      id: 1,
       createdDate: new Date(),
       statusId: 1,
       totalPrice: 153.00
     },
     {
+      id: 2,
       createdDate: new Date(),
       statusId: 2,
       totalPrice: 23.00
     },
     {
+      id: 3,
       createdDate: new Date(),
       statusId: 3,
       totalPrice: 123223.00
     },
 ]
 
-  constructor() { }
+  constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
   }

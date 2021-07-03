@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
 
     const currentYear = moment().year();
     this.minDate = moment([currentYear - 120, 0, 1]);
-    this.maxDate = moment([currentYear + -6, 11, 31])
+    this.maxDate = moment([currentYear + -6, 11, 31]);
 
     let self = this;
       self.form = this.formBuilder.group({

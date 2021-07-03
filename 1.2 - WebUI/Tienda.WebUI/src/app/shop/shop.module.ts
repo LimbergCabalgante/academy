@@ -16,8 +16,7 @@ import { RangePipe } from '../common/pipes/range.pipe';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -38,13 +37,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        MatSnackBarModule,
-        MatTooltipModule
+        MatSnackBarModule
     ],
     exports: [
         ShopComponent,
         ProductComponent,
         ViewProductComponent
+    ],
+    providers: [
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
     ]
 })
 export class ShopModule { }

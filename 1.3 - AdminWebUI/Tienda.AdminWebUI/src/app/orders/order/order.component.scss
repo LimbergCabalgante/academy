@@ -1,0 +1,34 @@
+.order{
+    display: flex;
+    flex-flow: row nowrap;
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: rgb(245, 245, 245);
+    color: rgb(103, 58, 183);
+}
+
+.info{
+    margin: 2px;
+    font-weight: bold;
+}
+
+.status-ok, .status-nope, .status-hmmm{
+    justify-self: flex-end;
+    margin-left: auto;
+}
+
+.status-ok{
+    color: rgb(0, 128, 0);
+}
+
+.status-nope{
+    color: rgb(219, 20, 60);
+}
+
+.status-hmmm{
+    color: rgb(180, 180, 180);
+    cursor: pointer;
+}

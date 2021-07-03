@@ -32,8 +32,7 @@ export class OrderManagementService {
             }
             this.cart.cartEntries.push(cartEntry);         
         }
-        this.persistCart();
-        
+        this.persistCart();     
     }
 
     removeItemFromCart(product: Product){
@@ -54,7 +53,6 @@ export class OrderManagementService {
             cartEntry.quantity = quantity;
         }
         this.persistCart();
-
     }
 
     getEntryByProductId(id: number): CartEntry{
@@ -64,6 +62,13 @@ export class OrderManagementService {
         else{
             return null;
         }
+    }
+
+    clearCart(){
+        if(this.cart){
+            this.cart = new Cart();
+        }
+        this.persistCart();
     }
 
     persistCart(){

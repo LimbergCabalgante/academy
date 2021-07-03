@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Cart } from 'src/app/common/dtos/cart';
 import { OrderManagementService } from '../order-management.service';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { DeletionConfirmationDialogComponent } from './deletion-confirmation-dialog/deletion-confirmation-dialog.component';
 
 @Component({
   selector: 'app-cart',
@@ -11,9 +16,14 @@ export class CartComponent implements OnInit {
   cart: Cart;
   totalPrice: number;
 
-  constructor(public orderManagementService: OrderManagementService) { 
+  constructor(public orderManagementService: OrderManagementService, private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) { 
     this.cart = orderManagementService.cart;
-    this.totalPrice = this.cart.cartEntries.map(item => item.product.price * item.quantity).reduce((prev, next) => (prev + next));
+    if(this.cart.cartEntries.length > 0){
+      this.totalPrice = this.cart.cartEntries.map(item => item.product.price * item.quantity).reduce((prev, next) => (prev + next));
+    }
+    else{
+      this.totalPrice = 0;
+    }
   }
 
   ngOnInit(): void {
@@ -34,12 +44,40 @@ export class CartComponent implements OnInit {
   }
 
   removeItemFromCart(product){
-    this.orderManagementService.removeItemFromCart(product);
-    this.totalPrice = this.cart.cartEntries.map(item => item.product.price * item.quantity).reduce((prev, next) => (prev + next));
+    let dialogRef = this.dialog.open(DeletionConfirmationDialogComponent, {
+      disableClose: true,
+      autoFocus: false
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == "true"){
+        this.orderManagementService.removeItemFromCart(product);
+        if(this.cart.cartEntries.length > 0){
+          this.totalPrice = this.cart.cartEntries.map(item => item.product.price * item.quantity).reduce((prev, next) => (prev + next));
+        }
+        else{
+          this.totalPrice = 0;
+        }
+      }
+    })
   }
 
   createOrder(){
-    console.log(this.cart);
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      disableClose: true,
+      autoFocus: false
+    })
+    dialogRef.afterClosed().subscribe(result => {
+
+      if(result == "true"){
+        console.log(this.cart);
+        this.orderManagementService.clearCart();
+        this.snackBar.open("Orden concretada. Gracias por su compra.", "OK", {panelClass: "success-snackbar"});
+        this.cart = this.orderManagementService.cart;
+        this.totalPrice = 0;
+        this.router.navigate(["/orders"])
+      }
+
+    });
   }
 
 }

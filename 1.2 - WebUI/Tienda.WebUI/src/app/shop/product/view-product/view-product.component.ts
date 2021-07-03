@@ -17,8 +17,6 @@ export class ViewProductComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.product.product);
-
     let self = this;
       self.form = this.formBuilder.group({
         product: this.product.product.id,
