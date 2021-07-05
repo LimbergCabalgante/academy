@@ -27,15 +27,17 @@ export class OrderComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(newStatus=>{
-      this.ordersService.updateOrderStatus(this.order.id, newStatus).subscribe({
-        next: ()=>{
-          this.order.statusId = newStatus;
-          this.snackBar.open("Estado actualizado con éxito.", "OK", {panelClass: "success-snackbar"});
-        },
-        error: ()=>{
-          this.snackBar.open("Algo salió mal al actualizar el estado.", "OK", {panelClass: "error-snackbar"});
-        },
-      });
+      if(newStatus){
+        this.ordersService.updateOrderStatus(this.order.id, newStatus).subscribe({
+          next: ()=>{
+            this.order.statusId = newStatus;
+            this.snackBar.open("Estado actualizado con éxito.", "OK", {panelClass: "success-snackbar"});
+          },
+          error: ()=>{
+            this.snackBar.open("Algo salió mal al actualizar el estado.", "OK", {panelClass: "error-snackbar"});
+          }
+        });
+      }
     })  
   }
 
